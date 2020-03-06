@@ -1,0 +1,146 @@
+
+{% load static%}
+
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+    <link rel="stylesheet" href="{% static 'style/style.css' %}">
+</head>
+
+
+<div class="sidenav">
+         <div class="login-main-text">
+
+            <h2>Online Leave Application</h2>
+            <hr></hr>
+            <p>Login here to access your leave</p>
+
+
+         </div>
+
+        <!-- Footer -->
+<footer class="page-footer font-small blue pt-4">
+
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <!-- Content -->
+        <h5 class="text-uppercase"> </h5>
+        <p></p>
+
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+<!--        <h5 class="text-uppercase">Links</h5>-->
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!"></a>
+          </li>
+          <li>
+            <a href="#!"></a>
+          </li>
+          <li>
+            <a href="#!"></a>
+          </li>
+          <li>
+            <a href="#!"></a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+<!--        <h5 class="text-uppercase">Links</h5>-->
+
+        <ul class="list-unstyled">
+          <li>
+           <a href="#!"></a>
+                        <a href="#!"></a>
+                       <a href="#!"></a>
+             <a href="#!"></a>
+                        <a href="#!"></a>
+                       <a href="#!"></a>
+
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+
+    <br><br>
+    <div class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="footer-copyright text-center py-3">
+
+  </div>
+    </div>
+</div>
+    <!-- copy right end-->
+
+
+
+</footer>
+
+<!-- Footer end -->
+<footer id="sticky-footer" class=" text-white-50">
+    <div class="container text-center">
+        <br><br><br><br>
+
+        <hr>
+      <small>Copyright &copy; 2020, Annual Leave system </small>
+    </div>
+  </footer>
+      </div>
+
+
+
+
+      <div class="main">
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+              <form action="/login_user/" method="POST">{% csrf_token%}
+                  <div class="form-group">
+                     <label>User Name</label>
+                     <input type="text" class="form-control" placeholder="User Name" name="username">
+                  </div>
+                  <div class="form-group">
+                     <label>Password</label>
+                     <input type="password" class="form-control" placeholder="Password" name="password">
+                  </div>
+                  <button type="submit" class="btn btn-success">Login</button>
+                  <a href="{% url 'reset_password'%}" type="submit" class="btn btn-info">Forget Password ?</a>
+               </form>
+            </div>
+         </div>
+      </div>
+
+

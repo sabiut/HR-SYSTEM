@@ -21,26 +21,21 @@ urlpatterns = [
 
     path(r'accounts/', include('django.contrib.auth.urls')),
     path(r'', include('login.urls')),
-    path(r'', include('leaveform.urls')),
-    path(r'', include('authorize_leave.urls')),
-    path(r'', include('Hr_office.urls')),
-    path(r'', include('staffinfo.urls')),
-    path(r'', include('sickleave.urls')),
-    path(r'', include('staff_balance.urls')),
-    path(r'', include('holidays.urls')),
-    path(r'', include('personal_info.urls')),
-    path(r'', include('encashment.urls')),
-    path(r'', include('loans.urls')),
-    path(r'', include('housing_loan.urls')),
-    path(r'', include('medical_scheme.urls'))
+    # path(r'', include('leaveform.urls')),
+    # path(r'', include('authorize_leave.urls')),
+    # path(r'', include('Hr_office.urls')),
+    # path(r'', include('staffinfo.urls')),
+    # path(r'', include('sickleave.urls')),
+    # path(r'', include('staff_balance.urls')),
+    # path(r'', include('holidays.urls')),
+    # path(r'', include('personal_info.urls')),
+    # path(r'', include('encashment.urls')),
+    # path(r'', include('loans.urls')),
+    # path(r'', include('housing_loan.urls')),
+    # path(r'', include('medical_scheme.urls'))
 
 ]
 
 # customize the administrator text
 admin.site.site_header = "Online leave application"
 admin.site.index_title = "Welcome to e-Leave Administrator"
-
-
-
-
-
