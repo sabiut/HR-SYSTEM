@@ -1,0 +1,56 @@
+{% extends "profile_page.html"%}
+
+{%block content%}
+
+<p> Select a leave type or an after hour form below to launch your application</p>
+<table id=table class="table table-striped">
+  <thead>
+        <tr>
+
+        </tr>
+
+  </thead>
+
+<tr  class="success">
+    <td>
+        <form action="{%url 'select_leave_type'%}" method="post">{% csrf_token %}
+
+
+
+    <td>Select Form Type:
+            <select name="sel_leave_option">
+                 <option value="Annual">Annual</option>
+                    <option value="Sick">Sick</option>
+                    <option value="Encashment">Encashment</option>
+                    <option value="Medical">Medical</option>
+
+            </select>
+
+            <input type="submit"  class="btn btn-info"  value="Submit Query"/>
+
+        </td>
+
+
+
+    <!--Security form-->
+
+    <td>
+        <form action="#" method="post">{% csrf_token %}
+
+
+
+    <td>Select after hour form:
+            <select name="sel_island">
+                 <option value="Annual">Annual</option>
+                    <option value="Sick">Sick</option>
+
+            </select>
+
+            <input type="submit"  class="btn btn-info"  value="Submit Query"/>
+
+        </td>
+</tr>
+    </form>
+</table>
+
+{% endblock %}

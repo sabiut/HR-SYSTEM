@@ -53,6 +53,15 @@ def login_user(request):
         return HttpResponseRedirect('/invalid_page')
 
 
+# Filter annual leaves by login user
+@login_required(login_url='home')
+def display_pending_annual_leave(request):
+    if request.user.is_authenticated:
+        get_user_id = request.user.id
+        display = NewLeave.objects.filter(user_id=get_user_id, Manager_Authorization_Status="Pending")
+        return render(request, 'display_login_user_annual_leave.html', {'display': display})
+
+
 @login_required(login_url='home')
 def director_page(request):
     username = None
@@ -128,7 +137,6 @@ def director_page(request):
             count_director_approved_sick = SickLeave.objects.filter(user_id=get_user_id,
                                                                     user__groups__name='Director').filter(
                 Director_Authorization_Status='Approved').count()
-
 
             return render(request, 'director_page.html', locals())
         except ObjectDoesNotExist:
@@ -329,7 +337,7 @@ def hr(request):
                                                                        Director_Authorization_Status='Approved',
                                                                        Archived='').count()
 
-            return render(request, "hr_page.html", locals() )
+            return render(request, "hr_page.html", locals())
         except ObjectDoesNotExist:
             return render(request, 'throw_balance_error.html')
 

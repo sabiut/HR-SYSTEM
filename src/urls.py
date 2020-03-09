@@ -21,8 +21,8 @@ urlpatterns = [
 
     path(r'accounts/', include('django.contrib.auth.urls')),
     path(r'', include('login.urls')),
-    # path(r'', include('leaveform.urls')),
-    # path(r'', include('authorize_leave.urls')),
+    path(r'', include('leaveform.urls')),
+    path(r'', include('authorize_leave.urls')),
     # path(r'', include('Hr_office.urls')),
     # path(r'', include('staffinfo.urls')),
     # path(r'', include('sickleave.urls')),

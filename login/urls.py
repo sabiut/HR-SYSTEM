@@ -12,6 +12,7 @@ urlpatterns = [
     path('invalid_page/', views.invalid_page, name="invalid_page"),
     path('log_out/', views.log_out, name="logout"),
     path('hr/', views.hr, name='hr_officer'),
+    path(r'display_pending_annual_leave/', views.display_pending_annual_leave, name='login_user_annual_leave'),
 
 
 ]

@@ -58,7 +58,7 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
              <li class="nav-item">
-                <a class="nav-link active" href="http://rbvpayslip:8000/loggin/">
+                <a class="nav-link active" href="http://127.0.0.1:8000/admin/">
 
                    <i class="fas fa-user-cog"></i>
 
@@ -74,7 +74,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{%url 'leave_options'%}">
                   <i class="fab fa-wpforms"></i>
                   Application form
                 </a>
@@ -218,7 +218,7 @@
                                     <div class="card-header" >
                                     <ul class="nav nav-pills card-header-pills">
                                         <li class="nav-item">
-                                            <a class="nav-link " href=""> Annual leave | <font color="red">Pending Approval inbox({{count_pending_leave_profile}}) </font></a></a>
+                                            <a class="nav-link " href="{%url 'login_user_annual_leave'%}"> Annual leave | <font color="red">Pending Approval inbox({{count_pending_leave_profile}}) </font></a></a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="">Approved By Manager | <font color='orange'>Annual Leaves inbox({{count_manager_approved_leave}})</font></a>
