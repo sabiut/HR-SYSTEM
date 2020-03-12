@@ -111,3 +111,11 @@ def send_email_to_Authorizer(request):
                                                                                              "Authorize the leave.",
                           "Annual Leave Application <eleavesystem@rbv.gov.vu>",
                           [to_emails])
+
+
+@login_required(login_url='home')
+def filter_manager_approved_annual_leave(request):
+    query_set = Group.objects.filter(user=request.user)  # added that to filter by department
+    in_group = NewLeave.objects.filter(department=query_set[2], user__groups__name='authorizer').filter(
+        Director_Authorization_Status='Approved')
+    return render(request, 'manager_approved_annual_leave_director.html', {'in_group': in_group})

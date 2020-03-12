@@ -342,6 +342,25 @@ def hr(request):
             return render(request, 'throw_balance_error.html')
 
 
+@login_required()
+def display_all_approved_annual_leave(request):
+    if request.user.is_authenticated:
+        get_user_id = request.user.id
+        display = NewLeave.objects.filter(user_id=get_user_id, Manager_Authorization_Status="Approved",
+                                          Director_Authorization_Status='Approved',
+                                          Archived='')
+        return render(request, 'display_director_approved_annual_leave.html', {'display': display})
+
+
+@login_required(login_url='home')
+def display_manager_approved_annual_leave(request):
+    if request.user.is_authenticated:
+        get_user_id = request.user.id
+        display = NewLeave.objects.filter(user_id=get_user_id, Manager_Authorization_Status="Approved",
+                                          Director_Authorization_Status='Pending', Archived='')
+        return render(request, 'display_manager_approved_annual_leave.html', {'display': display})
+
+
 # get site header for password change form text
 class CustomResetPasswordView(PasswordResetView):
     def get_context_data(self, **kw):

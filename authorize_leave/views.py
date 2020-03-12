@@ -76,3 +76,60 @@ def send_email_to_Director(request, staff_id):
                   "Please login to http://ec2-18-212-65-46.compute-1.amazonaws.com/ to Authorize the leave.",
                   "Approved Annual Leave " "<eleavesystem@rbv.gov.vu>",
                   to_send)
+
+
+@login_required(login_url='home')
+def Tobeapprovebydirector(request):
+    query_set = Group.objects.filter(user=request.user)
+    all_manager_approved_leaves = NewLeave.objects.filter(department=query_set[2],
+                                                          Manager_Authorization_Status="Approved",
+                                                          Director_Authorization_Status='Pending')
+    return render(request, 'tobe_approvebydirector.html', locals())
+
+
+# Unit Director form to authorize leave
+@login_required(login_url='home')
+def unitDirectorForm(request, staffs_id):
+    if request.method == 'POST':
+        get_staff_id = NewLeave.objects.get(id=staffs_id)
+        name = get_staff_id.user
+        form = DirectorForm(request.POST, instance=get_staff_id)
+        if form.is_valid():
+            calculateBalance(get_staff_id)
+            form.save()
+            director_send_email_to_staff(request, get_staff_id)
+            return render(request, 'director_success_approved_leave.html', {'name': name})
+
+    else:
+        get_staff_id = NewLeave.objects.get(id=staffs_id)
+        form = DirectorForm(instance=get_staff_id)
+
+    return render(request, 'director_authorize_form.html', {'form': form})
+
+
+# update staff leave balance on director approval
+def calculateBalance(staff_id):
+    update_balance = staff_id
+    set_user = update_balance.user
+    get_user = Leave_Balance.objects.get(user=set_user)
+    get_user.Leave_current_balance = get_user.Leave_current_balance - update_balance.Total_working_days
+    get_user.save()
+
+
+def director_send_email_to_staff(request, staff_id):
+    to_emails = staff_id.user.email
+    if staff_id.Director_Authorization_Status == 'Approved':
+        send_mail("Annual Leave approved by" + " " + staff_id.Authorized_by_Director,
+                  "We have good news for you, the unit Director" + " " + staff_id.Authorized_by_Director + " " + "have " + staff_id.Director_Authorization_Status
+                  + " " + "your annual leave. \n" +
+                  "Enjoy your holiday! :)",
+                  "Annual Leave " "<eleavesystem@rbv.gov.vu>",
+                  [to_emails])
+    elif staff_id.Director_Authorization_Status == 'Rejected':
+        send_mail("Leave Application Rejected by" + " " + staff_id.Authorized_by_Director,
+                  "We have bad news for you, Your annual leave application have been {}".format(
+                      staff_id.Director_Authorization_Status) + " " + "by your Director {}".format(
+                      staff_id.Authorized_by_Director) + ". " + "\n Consult your unit Director for more"
+                                                                "information."
+                  ,
+                  "Annual Leave <eLeavesystem@rbv.gov.vu>", [to_emails], fail_silently=False)
