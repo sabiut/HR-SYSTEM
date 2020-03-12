@@ -133,3 +133,28 @@ def director_send_email_to_staff(request, staff_id):
                                                                 "information."
                   ,
                   "Annual Leave <eLeavesystem@rbv.gov.vu>", [to_emails], fail_silently=False)
+
+
+@login_required(login_url='home')
+def approved_leaves(request):
+    query_set = Group.objects.filter(user=request.user)
+    approvedleaves = NewLeave.objects.filter(department=query_set[2], Manager_Authorization_Status="Approved",
+                                             Director_Authorization_Status="Approved")
+    return render(request, 'approvedleaves.html', locals())
+
+
+@login_required(login_url='home')
+def annual_pending_director_approval(request):
+    query_set = Group.objects.filter(user=request.user)
+    all_manager_approved_leaves = NewLeave.objects.filter(department=query_set[1],
+                                                          Manager_Authorization_Status="Approved",
+                                                          Director_Authorization_Status='Pending')
+    return render(request, 'display_annual_pending_director_approval.html', locals())
+
+
+@login_required(login_url='home')
+def approved_leaves_authorizer_page(request):
+    query_set = Group.objects.filter(user=request.user)
+    approvedleaves = NewLeave.objects.filter(department=query_set[1], Manager_Authorization_Status="Approved",
+                                             Director_Authorization_Status="Approved")
+    return render(request, 'approvedleaves.html', locals())
