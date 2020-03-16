@@ -292,16 +292,16 @@
                                     <div class="card-header" >
                                     <ul class="nav nav-pills card-header-pills">
                                        <li class="nav-item">
-                                         <a class="nav-link" href="#" >Unit Manager | <font color="red">Sick Leave inbox({{count_sick_leaves}})</font></a>
+                                         <a class="nav-link" href="{%url 'display_sick_leave_Authorizer_page'%}" >Unit Manager | <font color="red">Sick Leave inbox({{count_sick_leaves}})</font></a>
                                          </li>
 
                                            <li class="nav-item">
-                                            <a class="nav-link" href="#" >Pending Director Approval | <font color="red">inbox({{count_approved_sick_leave}})</font></a>
+                                            <a class="nav-link" href="{% url 'sick_leave_pending_director_approval'%}" > Approval Approved| <font color="red">inbox({{count_approved_sick_leave}})</font></a>
                                             </li>
 
-                                               <li class="nav-item">
-                                              <a class="nav-link" href="#" >Approved Sick Leaves | <font color="green">inbox({{count_all_approved_sick_leaves}})</font></a>
-                                          </li>
+<!--                                               <li class="nav-item">-->
+<!--                                              <a class="nav-link" href="#" >Approved Sick Leaves | <font color="green">inbox({{count_all_approved_sick_leaves}})</font></a>-->
+<!--                                          </li>-->
 
 
                                         </ul>

@@ -57,6 +57,12 @@
 
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
+                <li class="nav-item">
+                <a class="nav-link" href="http://127.0.0.1:8000/profile_page/">
+                  <i class="fas fa-home"></i>
+                  Home
+                </a>
+              </li>
              <li class="nav-item">
                 <a class="nav-link active" href="http://127.0.0.1:8000/admin/">
 
@@ -242,16 +248,16 @@
                                     <div class="card-header" >
                                     <ul class="nav nav-pills card-header-pills">
                                        <li class="nav-item">
-                                           <a class="nav-link" href="" >Sick Leaves | <font color="red">Pending Approval inbox({{count_pending_sick_leave_profile}})</font></a>
+                                           <a class="nav-link" href="{% url 'display_pending_sick_leave'%}" >Sick Leaves | <font color="red">Pending Approval inbox({{count_pending_sick_leave_profile}})</font></a>
                                         </li>
 
                                      <li class="nav-item">
-                                         <a class="nav-link" href="" >Approved by Manager | <font color="orange">Sick Leaves inbox({{count_manager_approved_sick_leave}})</font></a>
+                                         <a class="nav-link" href="{% url 'display_manager_approved_sick_leave'%}" >Approved by Manager | <font color="orange">Sick Leaves inbox({{count_manager_approved_sick_leave}})</font></a>
                                         </li>
 
-                                     <li class="nav-item">
-                                         <a class="nav-link" href="" >Approved by Director | <font color="green">Sick Leaves inbox({{count_all_Director_approved_sick_leaves}})</font></a>
-                                        </li>
+<!--                                     <li class="nav-item">-->
+<!--                                         <a class="nav-link" href="" >Approved by Director | <font color="green">Sick Leaves inbox({{count_all_Director_approved_sick_leaves}})</font></a>-->
+<!--                                        </li>-->
 
 
 

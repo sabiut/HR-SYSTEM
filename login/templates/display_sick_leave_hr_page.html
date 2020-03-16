@@ -1,0 +1,52 @@
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  </head>
+{% extends "authorizer_page.html"%}
+
+{%block content%}
+
+<div class="container">
+  <h2>Sick Leave Applications</h2>
+  <p>Sick Leaves Applications pending Manager Approval.</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+          <th>Launch Date</th>
+        <th>Leave Type</th>
+        <th>Department</th>
+        <th>Date Illness Start</th>
+        <th>Date Illness End</th>
+        <th>Total work days</th>
+        <th>Leave Description</th>
+          <th>Medical certification</th>
+
+      </tr>
+    </thead>
+    {%for leave in sick_leaves%}
+
+    <tbody>
+      <tr class="success">
+       <td><a href="{% url 'approve_sick_leave' leave.id %}"><i class="fas fa-tools"></i></a></td>
+        <td>{{leave.user.first_name}}</td>
+        <td>{{leave.user.last_name}}</td>
+          <td>{{leave.Todays_Date}}</td>
+        <td>{{leave.Leave_type}}</td>
+        <td>{{leave.department}}</td>
+        <td>{{leave.Date_illness_began}}</td>
+        <td>{{leave.Date_illness_end}}</td>
+        <td>{{leave.Total_working_days}}</td>
+        <td>{{leave.Brief_explanation_of_illness}}</td>
+          <td><a href=" {{ leave.medical_certification.url }}" class="btn btn-primary btn-sm" target="_blank"><i class="fas fa-cloud-download-alt"></i> Download PDF</a> </td>
+
+
+
+    </tbody>
+    {%endfor%}
+
+  </table>
+</div>
+
+{%endblock%}

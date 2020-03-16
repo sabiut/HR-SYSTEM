@@ -13,4 +13,7 @@ admin.site.register(emergency)
 admin.site.register(Family_and_Dependants)
 admin.site.register(Job_History)
 admin.site.register(encashment)
+admin.site.register(SickLeave)
+admin.site.register(Sick_leave_balance)
+admin.site.register(Sick_leave_month_year)
 

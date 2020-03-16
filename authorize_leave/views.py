@@ -158,3 +158,53 @@ def approved_leaves_authorizer_page(request):
     approvedleaves = NewLeave.objects.filter(department=query_set[1], Manager_Authorization_Status="Approved",
                                              Director_Authorization_Status="Approved")
     return render(request, 'approvedleaves.html', locals())
+
+
+# approve sick leave
+@login_required(login_url='home')
+def Unit_manager_approve_sick_Form(request, staff_id):
+    if request.method == 'POST':
+        get_staff_id = SickLeave.objects.get(id=staff_id)
+        form = Manager_approve_sick_Form(request.POST, instance=get_staff_id)
+        name = get_staff_id.user
+        if form.is_valid():
+            calculate_sick_leave_Balance(get_staff_id)
+            form.save()
+            manager_send_sick_leave_email_to_staff(request, get_staff_id)
+            #Manager_send_sick_leave_email_to_Director(request, get_staff_id)
+            return render(request, 'manager_success_authorize_sick.html', {'name': name})
+
+    else:
+        get_staff_id = SickLeave.objects.get(id=staff_id)
+        form = Manager_approve_sick_Form(instance=get_staff_id)
+    return render(request, 'manager_authorize_sick_form.html', {'form': form})
+
+
+@login_required(login_url='home')
+def manager_send_sick_leave_email_to_staff(request, staff_id):
+    email_staff = staff_id.user.email
+    if staff_id.Manager_Authorization_Status == 'Approved':
+        send_mail("Sick Leave Application Approved by" + " " + staff_id.Authorized_by_Manager,
+                  "We have good news for you. Your sick leave application have been {}".format(
+                      staff_id.Manager_Authorization_Status) + " " + "by your Manager {}".format(
+                      staff_id.Authorized_by_Manager) + " " + "We have updated your sick leave balance.\n Enjoy your "
+                                                              " leave",
+                  "Sick Leave <eLeavesystem@rbv.gov.vu>", [email_staff], fail_silently=False)
+    elif staff_id.Manager_Authorization_Status == 'Rejected':
+        send_mail("Sick Leave Application Rejected by" + " " + staff_id.Authorized_by_Manager,
+                  "We have bad news for you, Your sick leave application have been {}".format(
+                      staff_id.Manager_Authorization_Status) + " " + "by your Manager {}".format(
+                      staff_id.Authorized_by_Manager) + ". " + "\n We regret that we weren't able to"
+                                                               "forward your leave to your unit director."
+                                                               "\n Consult your unit manager for more information."
+                  ,
+                  "Sick Leave <eLeavesystem@rbv.gov.vu>", [email_staff], fail_silently=False)
+
+
+# update staff sick leave balance on director approval
+def calculate_sick_leave_Balance(staff_id):
+    update_balance = staff_id
+    set_user = update_balance.user
+    get_user = Sick_leave_balance.objects.get(user=set_user)
+    get_user.sick_leave_balance = get_user.sick_leave_balance - update_balance.Total_working_days
+    get_user.save()

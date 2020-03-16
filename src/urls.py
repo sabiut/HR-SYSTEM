@@ -25,7 +25,7 @@ urlpatterns = [
     path(r'', include('authorize_leave.urls')),
     # path(r'', include('Hr_office.urls')),
     # path(r'', include('staffinfo.urls')),
-    # path(r'', include('sickleave.urls')),
+    path(r'', include('sickleave.urls')),
     # path(r'', include('staff_balance.urls')),
     # path(r'', include('holidays.urls')),
     # path(r'', include('personal_info.urls')),
@@ -37,5 +37,5 @@ urlpatterns = [
 ]
 
 # customize the administrator text
-admin.site.site_header = "Online leave application"
+admin.site.site_header = "Human Resource System"
 admin.site.index_title = "Welcome to e-Leave Administrator"

@@ -36,7 +36,7 @@ def login_user(request):
         else:
             ip = request.META.get("REMOTE_ADDRESS", " ")
             get_ip = socket.gethostbyname(socket.gethostname())
-            send_mail("RBV eLeave", "Your eleave Profile have been access from the IP:" +
+            send_mail("eLeave", "Your eleave Profile have been access from the IP:" +
                       get_ip + ". " + " Please report this to the administrator if you find this suspicious",
                       "eleave security info <eleavesystem@vfsc.vu>", [to_emails])
 
@@ -69,7 +69,7 @@ def director_page(request):
         try:
             profile_info = request.user.leave_balance
             entitlements = request.user.monthly_entitlement
-            # sick_leave_balance = request.user.sick_leave_balance
+            sick_leave_balance = request.user.sick_leave_balance
             # medical_entitlement = request.user.medical_entitlement
             info = request.user
             query_set = Group.objects.filter(user=request.user)
@@ -150,7 +150,7 @@ def profile_page(request):
         try:
             profile_info = request.user.leave_balance
             entitlements = request.user.monthly_entitlement
-            # sick_leave_balance = request.user.sick_leave_balance
+            sick_leave_balance = request.user.sick_leave_balance
             # medical_entitlement = request.user.medical_entitlement
             info = request.user
             query_set = Group.objects.filter(user=request.user)
@@ -214,7 +214,7 @@ def authorizer_page(request):
         try:
             profile_info = request.user.leave_balance
             entitlements = request.user.monthly_entitlement
-            # sick_leave_balance = request.user.sick_leave_balance
+            sick_leave_balance = request.user.sick_leave_balance
             # medical_entitlement = request.user.medical_entitlement
             info = request.user
             query_set = Group.objects.filter(user=request.user)
@@ -300,7 +300,7 @@ def hr(request):
             entitlements = request.user.monthly_entitlement
             # medical_entitlement = request.user.medical_entitlement
             info = request.user
-            # sick_leave_balance = request.user.sick_leave_balance
+            sick_leave_balance = request.user.sick_leave_balance
             get_user_id = request.user.id
             approved_leaves = NewLeave.objects.filter(Manager_Authorization_Status='Approved',
                                                       Director_Authorization_Status='Approved').count()
@@ -359,6 +359,23 @@ def display_manager_approved_annual_leave(request):
         display = NewLeave.objects.filter(user_id=get_user_id, Manager_Authorization_Status="Approved",
                                           Director_Authorization_Status='Pending', Archived='')
         return render(request, 'display_manager_approved_annual_leave.html', {'display': display})
+
+
+@login_required(login_url='home')
+def display_pending_sick_leave(request):
+    if request.user.is_authenticated:
+        get_user_id = request.user.id
+        display = SickLeave.objects.filter(user_id=get_user_id, Manager_Authorization_Status="Pending")
+        return render(request, 'display_login_user_sick_leave.html', {'display': display})
+
+
+@login_required(login_url='home')
+def display_manager_approved_sick_leave(request):
+    if request.user.is_authenticated:
+        get_user_id = request.user.id
+        display = SickLeave.objects.filter(user_id=get_user_id, Manager_Authorization_Status="Approved",
+                                           Director_Authorization_Status='Pending', Archived='')
+        return render(request, 'display_manager_approved_sick_leave.html', {'display': display})
 
 
 # get site header for password change form text

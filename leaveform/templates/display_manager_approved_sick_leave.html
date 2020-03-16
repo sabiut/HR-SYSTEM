@@ -1,0 +1,54 @@
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  </head>
+{% extends "profile_page.html"%}
+
+{%block content%}
+
+<div class="container">
+  <h2>Approved Sick leaves</h2>
+  <p>List of sick leaves that has been approved by the Manager.</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Leave Type</th>
+        <th>Department</th>
+          <th>Launch Date</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Total work days</th>
+        <th>Description</th>
+          <th>Medical certificate</th>
+          <th>Manger Authorization Status</th>
+           <th>Approved By Manager</th>
+           <th>Authorize Date</th>
+      </tr>
+    </thead>
+    {%for leave in display%}
+
+    <tbody>
+      <tr class="success">
+        <td>{{leave.user.first_name}}</td>
+        <td>{{leave.user.last_name}}</td>
+        <td>{{leave.Leave_type}}</td>
+        <td>{{leave.department}}</td>
+          <td>{{leave.Todays_Date}}</td>
+        <td>{{leave.Date_illness_began}}</td>
+        <td>{{leave.Date_illness_end}}</td>
+        <td>{{leave.Total_working_days}}</td>
+        <td>{{leave.Brief_explanation_of_illness}}</td>
+          <td><a href=" {{ leave.medical_certification.url }}" class="btn btn-primary btn-sm" target="_blank"><i class="fas fa-cloud-download-alt"></i> Download PDF</a> </td>
+          <td>{{leave.Manager_Authorization_Status}}</td>
+          <td>{{leave.Authorized_by_Manager}}</td>
+        <th>{{leave.Authorised_Date}}</th>
+
+
+    </tbody>
+    {%endfor%}
+
+  </table>
+</div>
+
+{%endblock%}

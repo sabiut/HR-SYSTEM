@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'mathfilters',
     'login',
     'leaveform',
-    'authorize_leave'
+    'authorize_leave',
+    'sickleave'
 ]
 
 MIDDLEWARE = [

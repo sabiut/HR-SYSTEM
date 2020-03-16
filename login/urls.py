@@ -17,5 +17,8 @@ urlpatterns = [
          name='all_approved_annual_leave'),
     path(r'display_manager_approved_annual_leave/', views.display_manager_approved_annual_leave,
          name='manager_approved_annual_leave'),
+    path(r'display_pending_sick_leave/', views.display_pending_sick_leave, name='display_pending_sick_leave'),
+    path(r'display_manager_approved_sick_leave/', views.display_manager_approved_sick_leave,
+         name='display_manager_approved_sick_leave'),
 
 ]

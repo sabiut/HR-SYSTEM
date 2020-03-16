@@ -7,7 +7,7 @@ urlpatterns = [
     path(r'Tobeapprovebydirector/', views.Tobeapprovebydirector, name='to_be_approved_by_director'),
     path(r'<int:staffs_id>/', views.unitDirectorForm, name='department_director'),
     path(r'approved_leaves/', views.approved_leaves, name='approved_leave'),
-    # path(r'<int:staff_id>/approve_sick_leave/', views.Unit_manager_approve_sick_Form, name='approve_sick_leave'),
+    path(r'<int:staff_id>/approve_sick_leave/', views.Unit_manager_approve_sick_Form, name='approve_sick_leave'),
     # path(r'<int:staffs_id>/director_approve_sick_leave/', views.unit_Director_authorize_sick_leave_Form,
     #      name='director_approve_sick_leave'),
     # path(r'send_email_to_Director/', views.send_email_to_Director, name='send_email_to_Director'),
