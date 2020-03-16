@@ -1,0 +1,85 @@
+<header>
+
+  <!--font awesome-->
+
+  <!-- font owesone-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--font owesome end-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <!--end font awesome-->
+
+
+<style type ="text/css">
+
+#main{
+width:910px;
+height:620px;
+margin:30px auto
+}
+.modal-content{
+  width: 1200px;
+}
+
+#body .modal-content{
+  #width: 160%!important;
+  #margin-left: -30%!important;
+#}
+</style>
+
+</header>
+{% extends "profile_page.html"%}
+
+{%block content%}
+
+<!-- start modal-->
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Annual Vanuatu Holidays</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body ">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal-->
+
+<div id="main">
+
+<h4><i class="fas fa-tasks" aria-hidden="true"></i>
+Use this form to submit your annual leave encashment application. </h4>
+<form method="post">
+
+  {% csrf_token %}
+
+  <table>
+
+  {{user_form.as_table}}<br><br>
+
+
+  {{encashment_form.as_table}}
+
+</table><br>
+
+
+<input class="btn btn-primary btn-lg" role="button" type="submit" name="submit" value="Submit Application" >
+
+</form>
+
+</div>
+
+{%endblock%}

@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'login',
     'leaveform',
     'authorize_leave',
-    'sickleave'
+    'sickleave',
+    'encashment'
 ]
 
 MIDDLEWARE = [

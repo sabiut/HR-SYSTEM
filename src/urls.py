@@ -29,7 +29,7 @@ urlpatterns = [
     # path(r'', include('staff_balance.urls')),
     # path(r'', include('holidays.urls')),
     # path(r'', include('personal_info.urls')),
-    # path(r'', include('encashment.urls')),
+    path(r'', include('encashment.urls')),
     # path(r'', include('loans.urls')),
     # path(r'', include('housing_loan.urls')),
     # path(r'', include('medical_scheme.urls'))
