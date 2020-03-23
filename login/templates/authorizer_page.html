@@ -140,7 +140,7 @@
 
               <ul class="nav flex-column mb-2">
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{%url 'financial_controller'%}">
                   <i class="fas fa-coins"></i>
                   Financial Controller
                 </a>
@@ -434,10 +434,10 @@
                                     <div class="card-header" >
                                     <ul class="nav nav-pills card-header-pills">
                                         <li class="nav-item">
-                                            <a class="nav-link " href="#"> Leave encashments | <font color="red">Pending Approval inbox({{count_pending_encashment_profile}}) </font></a></a>
+                                            <a class="nav-link " href="{%url 'pending_encashments_athorizer'%}"> Leave encashments | <font color="red">Pending Approval inbox({{count_pending_encashment_profile}}) </font></a></a>
                                         </li>
                                          <li class="nav-item">
-                                            <a class="nav-link" href="#" >Approved by Governor | <font color="green">Encashments inbox({{count_approved_encashment_profile}})</font></a>
+                                            <a class="nav-link" href="{%url 'approved_encashments_authorizer'%}" >Approved by Governor | <font color="green">Encashments inbox({{count_approved_encashment_profile}})</font></a>
                                          </li>
                                         </ul>
                                      </div>
