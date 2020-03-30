@@ -1,0 +1,40 @@
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  </head>
+{% extends "hr_page.html"%}
+
+{%block content%}
+<div class="container">
+  <h2>Department Leave Entitlements</h2>
+  <p>List of all staff entitlements.</p>
+  <div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Action</th>
+          <th>Staff Name</th>
+        <th>Entitlement</th>
+        <th>Current Balance</th>
+        <th>Month</th>
+        <th>Year</th>
+      </tr>
+    </thead>
+    {%for leave in query_monthly%}
+
+    <tbody>
+      <tr class="success">
+        <td><a href="{% url 'monthly_entitlement' %}"><i class="fas fa-cloud-download-alt"></i></a></td>
+        <td>{{leave.user.first_name }} {{leave.user.last_name }}</td>
+       <td>{{leave.user.monthly_entitlement.entitlement}}</td>
+        <td>{{leave.user.leave_balance.Leave_current_balance|floatformat:2}}</td>
+        <td>{{leave.Month}}</td>
+        <td>{{leave.Year}}</td>
+      </tr>
+    </tbody>
+    {%endfor%}
+
+  </table>
+</div>
+</div>
+
+{%endblock%}

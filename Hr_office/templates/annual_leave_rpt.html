@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+  <!-- choose one -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <title>VFSC Sick Leave Report</title>
+
+    <!-- jquery printer setup -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- test setup printer-->
+
+
+
+<!--
+    <script>
+$(function () {
+    $('button[type="submit"]').click(function () {
+        var pageTitle = 'VFSC Annual Leave',
+            stylesheet = '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css',
+            win = window.open('', 'Print', 'width=500,height=300');
+        win.document.write('<html><head><title>' + pageTitle + '</title>' +
+            '<link rel="stylesheet" href="' + stylesheet + '">' +
+            '</head><body>' + $('.container')[0].outerHTML + '</body></html>');
+
+        win.document.close();
+        win.print();
+        win.close();
+        return false;
+    });
+});
+
+
+    </script>
+
+    -->
+    <!-- end test setup printer-->
+
+
+
+
+
+</head>
+<body>
+<!-- setup view report start-->
+<br>
+<div class="container">
+    <div class="row">
+        <div class=" col-md-11">
+
+            {% load  static %}
+            <img src="{% static 'images/vfsc.jpeg' %}"  id="img"/>
+        </div>
+
+        <div class="col-md-1"><a href="javascript:window.print()"> <span class="pull-right"><i class="fas fa-print"> Print</i> </span></a></div>
+
+        <!--<div class="col-md-1"><span class="pull-right"><button class="btn btn-sm pull-right btn-default" type="submit">Print without logo</button></span></div>-->
+    </div>
+
+</div>
+<br>
+<div class="container">
+    <table class="table " id="printTable">
+    <thead class="table-success">
+
+      <tr>
+
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Leave Type</th>
+        <th>Department</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Total work days</th>
+        <th>Reason</th>
+          <th>Manger Authorization Status</th>
+          <th>Authorized By Manager</th>
+          <th>Director Authorization Status</th>
+          <th>Authorized By Director</th>
+
+      </tr>
+    </thead>
+    {%for leave in annual_leave_rpt%}
+
+    <tbody>
+      <tr class="table-active">
+
+        <td>{{leave.user.first_name}}</td>
+        <td>{{leave.user.last_name}}</td>
+        <td>{{leave.Leave_type}}</td>
+        <td>{{leave.department}}</td>
+        <td>{{leave.Start_Date}}</td>
+        <td>{{leave.End_Date}}</td>
+        <td>{{leave.Total_working_days}}</td>
+        <td>{{leave.Reason}}</td>
+          <td>{{leave.Manager_Authorization_Status}}</td>
+          <td>{{leave.Authorized_by_Manager}}</td>
+          <td>{{leave.Director_Authorization_Status}}</td>
+         <td>{{leave.Authorized_by_Director}}</td>
+
+
+
+    </tbody>
+    {%endfor%}
+
+  </table>
+
+</div>
+
+
+    <!-- view report end-->
+
+
+</body>
+</html>

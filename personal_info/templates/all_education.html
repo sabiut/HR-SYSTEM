@@ -1,0 +1,167 @@
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+
+    <!-- setup PDF file-->
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+    <!-- end PDF file-->
+
+
+    <!--set up excel-->
+    <script>
+       function exportTableToExcel(tblCustomers, filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tblCustomers);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+    // Specify file name
+    filename = filename?filename+'.xls':'annual_leaves.xls';
+
+    // Create download link element
+    downloadLink = document.createElement("a");
+
+    document.body.appendChild(downloadLink);
+
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+        // Setting the file name
+        downloadLink.download = filename;
+
+        //triggering the function
+        downloadLink.click();
+    }
+}
+    </script>
+
+<!-- End file set up excel_file-->
+
+    <!-- jquery printer setup -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- test setup printer-->
+
+
+
+
+    <script>
+$(function () {
+    $('button[type="submit"]').click(function () {
+        var pageTitle = 'Education Level',
+            stylesheet = '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css',
+            win = window.open('', 'Print', 'width=500,height=300');
+        win.document.write('<html><head><title>' + pageTitle + '</title>' +
+            '<link rel="stylesheet" href="' + stylesheet + '">' +
+            '</head><body>' + $('#tblCustomers')[0].outerHTML + '</body></html>');
+
+        win.document.close();
+        win.print();
+        win.close();
+        return false;
+    });
+});
+
+
+    </script>
+
+
+    <!-- end test setup printer-->
+
+
+
+</head>
+{% extends "hr_page.html"%}
+
+{%block content%}
+
+<div class="container">
+    <!-- setup view report start-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <span class="pull-left" ><button class="btn btn-sm pull-right btn-default" type="submit"><i style="font-size:15px" class="fas fa-print"> Print</i></button></span>
+
+            </div>
+
+                <div class="col-md-5">
+
+                    <span class="pull-right"><a href="#"  onclick="exportTableToExcel('tblCustomers')"><i style="font-size:20px" class="fa">&#xf1c3; </i> Excel File </a> </span>
+                    <!-- setup PDF file-->
+                    <span class="pull-right"> <a href="#" id="btnExport"><i style="font-size:20px" class="fas fa-file-pdf"> </i> PDF </a> | </span>
+                    <script type="text/javascript">
+                        $("body").on("click", "#btnExport", function () {
+                            html2canvas($('#tblCustomers')[0], {
+                                onrendered: function (canvas) {
+                                    var data = canvas.toDataURL();
+                                    var docDefinition = {
+                                        content: [{
+                                            image: data,
+                                            width: 500
+                                        }]
+                                    };
+                                    pdfMake.createPdf(docDefinition).download("education_level.pdf");
+                                }
+                            });
+                        });
+                    </script>
+                    <!-- end setup PDF file-->
+
+                </div>
+
+
+        </div>
+
+
+    </div>
+
+    <!-- view report end-->
+  <h2>Staff's Personal Information</h2>
+  <p>List of all personal info.</p>
+
+  <table class="table" id="tblCustomers">
+    <thead>
+      <tr class="info">
+        <th>Action</th>
+          <th>Drop</th>
+        <th>Name</th>
+        <th>Education Level</th>
+        <th>Institution</th>
+        <th>Major</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+          <th>Country</th>
+          <th>Last Education</th>
+      </tr>
+    </thead>
+    {%for leave in  personal_info%}
+
+    <tbody>
+      <tr class="success">
+       <td><a href="{% url 'edit_staff_education' leave.id %}"><i class="fas fa-user-edit"></i></a></td>
+          <td><a href="{% url 'drop_staff_education' leave.id %}"><i class="fas fa-trash-alt"></i></a></td>
+        <td>{{leave.user.first_name}} {{leave.user.last_name}}</td>
+        <td>{{leave.education_level}}</td>
+        <td>{{leave.Institution}}</td>
+        <td>{{leave.Major}}</td>
+        <td>{{leave.start_date}}</td>
+        <td>{{leave.end_date}}</td>
+          <td>{{leave.Country}}</td>
+           <td>{{leave.Last_Education}}</td>
+
+    </tbody>
+    {%endfor%}
+
+  </table>
+</div>
+
+{%endblock%}

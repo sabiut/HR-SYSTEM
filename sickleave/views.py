@@ -95,3 +95,9 @@ def sick_leave_pending_director_approval(request):
                                            Manager_Authorization_Status="Approved",
                                            Director_Authorization_Status='Pending')
     return render(request, 'display_sick_pending_director_authorizer_page.html', {'sick_leaves': sick_leaves})
+
+
+@login_required(login_url='home')
+def display_sick_leave(request):
+    sick_leaves = SickLeave.objects.all()
+    return render(request, 'display_sick_leave.html', {'sick_leaves': sick_leaves})

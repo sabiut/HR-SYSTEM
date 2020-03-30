@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Annual Leave Report</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <!--fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <!--fontawesome end-->
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class=" col-md-11">
+
+            {% load  static %}
+            <img src="{% static 'images/vfsc.jpeg' %}" />
+        </div>
+
+        <div class="col-md-1"><a href="javascript:window.print()"> <span class="pull-right"><i class="fas fa-print"> Print</i> </span></a></div>
+    </div>
+
+</div>
+
+<br>
+<div class="container">
+    <div class="row" >
+        {% for sick in display_annual%}
+        <div class="col-md-4">Name: <font color="green">{{sick.user.first_name}} {{sick.user.last_name}}</font></div>
+        <div class="col-md-4">Leave Type: <font color="green">{{sick.Leave_type}} </font></div>
+         <div class="col-md-3"><span class="pull-right">Date:<font color="blue">{% now "jS F Y" %}</font></span></div>
+
+
+
+
+        {%endfor%}
+    </div>
+
+        <br>
+       <br>
+       {% for sick in display_annual%}
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Department</th>
+      <th scope="col">Date Illness Started</th>
+      <th scope="col">Date Illness End</th>
+        <th scope="col">Description</th>
+        <th scope="col"> Number of days</th>
+        <th scope="col">Status </th>
+        <th scope="col">Authorized By </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+
+      <td>{{sick.department}}</td>
+      <td>{{sick.Start_Date}}</td>
+      <td>{{sick.End_Date}}</td>
+        <td>{{sick.Reason}}</td>
+        <td>{{sick.Total_working_days}}</td>
+        <td>{{sick.Manager_Authorization_Status}}</td>
+        <td>{{sick.Authorized_by_Manager}}</td>
+    </tr>
+
+  </tbody>
+</table>
+
+    {%endfor%}
+
+
+
+</div>
+
+<br><br><br><br><br><br>
+
+
+{%for sick in display_annual%}
+<div class="container ">
+                      <div class="row">
+                      <div class="col-md-3">Director Authorization Status: </div>
+                        <div class="col-md-3"><font color="green">{{sick.Director_Authorization_Status}} </font> </div>
+
+
+                      </div>
+            </div>
+{%endfor%}
+
+
+<div class="container ">
+                      <div class="row">
+                          <div class="col-md-3">Authorized By Director:</div>
+                          {%for sick in display_annual%}
+                          <div class="col-md-3">{{sick.Authorized_by_Director}}</div>
+                            {%endfor%}
+                      </div>
+            </div>
+
+
+
+</body>
+
+
+</html>

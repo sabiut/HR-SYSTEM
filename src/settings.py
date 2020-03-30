@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'leaveform',
     'authorize_leave',
     'sickleave',
-    'encashment'
+    'encashment',
+    'personal_info',
+    'Hr_office'
 ]
 
 MIDDLEWARE = [

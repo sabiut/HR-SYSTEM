@@ -1,0 +1,298 @@
+<header>
+
+  <!--font awesome-->
+
+  <!-- font owesone-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--font owesome end-->
+
+  <!--end font awesome-->
+
+
+<style type ="text/css">
+
+#main{
+width:910px;
+height:620px;
+margin:30px auto
+}
+</style>
+
+</header>
+{% extends "profile_page.html"%}
+
+{%block content%}
+
+<div id="main">
+
+<h3 ><i class="fa fa-user-tag" aria-hidden="true"></i>
+    My Personal information</h3>
+
+<p>
+  <a class="btn btn-primary" data-toggle="collapse" href="#personal_info" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Personal Info
+  </a>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#education_history" aria-expanded="false" aria-controls="collapseExample">
+    Education History
+  </button>
+
+    <a class="btn btn-primary" data-toggle="collapse" href="#emergency" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Emergency
+  </a>
+
+  <a class="btn btn-primary" data-toggle="collapse" href="#family_dependants" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Family and Dependants
+  </a>
+
+   <a class="btn btn-primary" data-toggle="collapse" href="#job_history" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Job History
+  </a>
+</p>
+<div class="collapse" id="personal_info">
+  <div class="card card-body">
+
+    <!-- create table-->
+    <div class="container">
+      <b>Personal Info</b>
+  <div class="row">
+    <div class="col-sm-3">Name: {{get_user.first_name}} {{get_user.last_name}}</div>
+    <div class="col">Email: {{get_user.email}}</div>
+    <div class="w-100"></div>
+
+    {% for a in profile%}
+    <div class="col-sm-3">Date of Birth: {{a.date_of_birth}}</div>
+    <div class="col">Gender: {{a.Gender}}</div>
+
+    <div class="container">
+    <div class="row">
+    <div class="col-sm-3">Marital Status: {{a.Marital_Status}}</div>
+    <div class="col">Religion: {{a.Religion}}</div>
+      <div class="w-100"></div>
+      <div class="col-sm-3">Address: {{a.Address}}</div>
+    <div class="col">Grade: {{a.Grade}}</div>
+    </div>
+    </div>
+
+
+    <div class="container">
+    <div class="row">
+    <div class="col-sm-3">Bank name: {{a.Bank_name}}</div>
+    <div class="col">Account number: {{a.Account_number}}</div>
+      <div class="w-100"></div>
+      <div class="col-sm-3">VNPF: {{a.VNPF}}</div>
+    <div class="col">Department: {{a.department}}</div>
+    </div>
+    </div>
+
+    <div class="container">
+    <div class="row">
+    <div class="col-sm-3">Employee code: {{a.employee_code}}</div>
+    <div class="col">Account number: {{a.Account_number}}</div>
+      <div class="w-100"></div>
+      <div class="col-sm-3">Job Title: {{a.job_title}}</div>
+    <div class="col">Join Date: {{a.join_Date}}</div>
+    </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <br>
+
+          <a href="{%url 'edit_my_personal_info'%}">
+            <i class="fas fa-user-edit">Edit</i>
+        </a>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+      {%endfor%}
+</div>
+
+    <!-- end table-->
+
+
+  </div>
+</div>
+
+
+  <div class="collapse" id="education_history">
+  <div class="card card-body">
+
+    <!-- create table-->
+    <div class="container">
+      <b>Education History</b>
+  <div class="row">
+
+
+    {% for a in education%}
+    <div class="col-sm-3">Education Level: {{a.education_level}}</div>
+    <div class="col">Institution: {{a.Institution}}</div>
+
+    <div class="container">
+    <div class="row">
+    <div class="col-sm-3">Major: {{a.Major}}</div>
+    <div class="col">Start Date: {{a.start_date}}</div>
+      <div class="w-100"></div>
+      <div class="col-sm-3">End Date: {{a.end_date}}</div>
+    <div class="col">Country: {{a.Country}}</div><br><br>
+    </div>
+    </div>
+ {%endfor%}
+
+<div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <br>
+<!--        <i class="fas fa-user-edit">Edit</i>-->
+        </div>
+      </div>
+    </div>
+</div>
+
+    <!-- end table-->
+  </div>
+</div>
+
+
+  <div class="collapse" id="emergency">
+
+  <div class="card card-body">
+
+    <!-- create table-->
+    <div class="container">
+       <b>Emergency Contacts</b>
+
+  <div class="row">
+     {% for a in emergency_data%}
+    <div class="col-sm-3">Contact Name: {{a.contact_name}} </div>
+    <div class="col">Relationship: {{a.Relationship}}</div>
+    <div class="w-100"></div>
+
+
+    <div class="col-sm-3">Address: {{a.Address}}</div>
+    <div class="col">City: {{a.City}}</div>
+
+    <div class="container">
+    <div class="row">
+    <div class="col-sm-3">Home Phone: {{a.Home_Phone}}</div>
+    <div class="col">Mobile Phone: {{a.Mobile_Phone}}</div>
+      <div class="w-100"></div>
+      <div class="col-sm-3">Address: {{a.Address}}</div>
+
+    </div>
+    </div>
+     {%endfor%}
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <br>
+        <a href="{%url 'edit_emergency'%}">
+            <i class="fas fa-user-edit">Edit</i>
+        </a>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  </div>
+</div>
+<!-- end -->
+
+  <div class="collapse" id="family_dependants">
+  <div class="card card-body">
+  <!-- create table-->
+    <div class="container">
+      <b>Family Dependants</b>
+  <div class="row">
+
+
+    {% for a in dependant%}
+    <div class="col-sm-3">Contact Name: {{a.contact_name}}</div>
+    <div class="col">Relationship: {{a.Relationship}}</div>
+
+    <div class="container">
+    <div class="row">
+    <div class="col-sm-3">Birth Date: {{a.Birth_Date}}</div>
+    <div class="col">Gender: {{a.Gender}}</div>
+      <div class="w-100"></div>
+      <div class="col-sm-3">Marital Status: {{a.Marital_Status}}</div>
+    <div class="col">Address: {{a.Address}}</div><br><br>
+    </div>
+    </div>
+ {%endfor%}
+
+<div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <br>
+<!--         <a href="#">-->
+<!--            <i class="fas fa-user-edit">Edit</i>-->
+<!--        </a>-->
+
+        </div>
+      </div>
+    </div>
+
+</div>
+
+    <!-- end table-->
+  </div>
+</div>
+
+
+
+
+  <div class="collapse" id="job_history">
+  <div class="card card-body">
+       <!-- create table-->
+    <div class="container">
+      <b>Job History</b>
+  <div class="row">
+
+
+    {% for a in job%}
+    <div class="col-sm-3">Company Name: {{a.Company_name}}</div>
+    <div class="col">Address: {{a.Address}}</div>
+
+    <div class="container">
+    <div class="row">
+    <div class="col-sm-3">Start Date: {{a.start_date}}</div>
+    <div class="col">End Date: {{a.start_date}}</div>
+      <div class="w-100"></div>
+      <div class="col-sm-3">Position: {{a.Position}}</div>
+    <div class="col">Responsibilities: {{a.Responsibilities}}</div><br><br>
+    </div>
+    </div>
+ {%endfor%}
+
+<div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <br>
+<!--        <i class="fas fa-user-edit">Edit</i>-->
+        </div>
+      </div>
+    </div>
+
+</div>
+
+    <!-- end table-->
+  </div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+{%endblock%}

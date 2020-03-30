@@ -1,0 +1,36 @@
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  </head>
+{% extends "hr_page.html"%}
+
+{%block content%}
+
+<div class="container">
+  <h2>Reserve Bank approved Leaves</h2>
+  <p>List of all used leaves to date</p>
+  <table class="table">
+    <thead>
+      <tr>
+       <!-- <th>Action</th>-->
+        <th>Staff name</th>
+        <th>Total used leaves</th>
+
+
+      </tr>
+    </thead>
+    {%for leave in users%}
+
+    <tbody>
+      <tr class="success">
+       <!--<td><a href="#"><i class="fas fa-location-arrow"></i></a></td>-->
+        <td>{{leave.first_name}} {{leave.last_name}}</td>
+        <td>{{leave.new_leave_tot_w_days}}</td>
+
+
+    </tbody>
+    {%endfor%}
+
+  </table>
+</div>
+
+{%endblock%}

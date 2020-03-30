@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path(r'sick_leave_application/', views.sick_leave_application, name="sick_leave_application"),
-    # path(r'display_sick_leave/', views.display_sick_leave, name="display_sick_leave"),
+    path(r'display_sick_leave/', views.display_sick_leave, name="display_sick_leave"),
     # path(r'update_sick_leave_balance/', views.update_sick_leave_balance, name='update_sick_leave_balance'),
     # path(r'calculate_sick_leave_balance/', views.calculate_sick_leave_balance, name='calculate_sick_leave_balance'),
     path(r'display_sick_leave_Authorizer_page/', views.display_sick_leave_Authorizer_page,

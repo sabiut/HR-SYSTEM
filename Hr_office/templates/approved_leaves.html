@@ -1,0 +1,48 @@
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  </head>
+{% extends "hr_page.html"%}
+
+{%block content%}
+
+<div class="container">
+  <h2>Reserve Bank approved Leaves</h2>
+  <p>List of all approved leaves.</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Leave Type</th>
+        <th>Department</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Total work days</th>
+        <th>Reason</th>
+
+      </tr>
+    </thead>
+    {%for leave in approved_leaves%}
+
+    <tbody>
+      <tr class="success">
+       <td><a href="{% url 'add_to_archive' leave.id %}"><i class="fas fa-location-arrow"></i></a></td>
+        <td>{{leave.user.first_name}}</td>
+        <td>{{leave.user.last_name}}</td>
+        <td>{{leave.Leave_type}}</td>
+        <td>{{leave.department}}</td>
+        <td>{{leave.Start_Date}}</td>
+        <td>{{leave.End_Date}}</td>
+        <td>{{leave.Total_working_days}}</td>
+        <td>{{leave.Reason}}</td>
+
+
+
+    </tbody>
+    {%endfor%}
+
+  </table>
+</div>
+
+{%endblock%}

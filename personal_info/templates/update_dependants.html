@@ -1,0 +1,20 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+ {%extends "profile_page.html"%}
+
+   {%block content%}
+
+<h3><i class ="fas fa-tasks"></i> Use this form to update your personal info</h3>
+      <form method="post">
+          {% csrf_token %}
+        <table>
+
+          {{ profile_form.as_table }}
+        </table><br>
+      <input class="btn btn-primary btn-lg" role="button" type="submit" name="submit" value="Save Record" >
+
+        </form>
+
+
+   {%endblock%}
