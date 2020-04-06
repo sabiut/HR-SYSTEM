@@ -2,22 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sick Leave Report</title>
+    <title>VFSC Leave encashment Report</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
       <!--fontawesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <!--fontawesome end-->
 
 </head>
-
 <body>
-
+{% load humanize %}
 <div class="container">
     <div class="row">
         <div class=" col-md-11">
 
             {% load  static %}
-            <img src="{% static 'images/vfsc.jpeg' %}" />
+            <img src="{% static 'images/logo.jpeg' %}" width="200"/>
         </div>
 
         <div class="col-md-1"><a href="javascript:window.print()"> <span class="pull-right"><i class="fas fa-print"> Print</i> </span></a></div>
@@ -26,11 +25,14 @@
 </div>
 
 <br>
+
 <div class="container">
     <div class="row" >
-        {% for sick in display_sick%}
+
+        {% for sick in report%}
+
         <div class="col-md-4">Name: <font color="green">{{sick.user.first_name}} {{sick.user.last_name}}</font></div>
-        <div class="col-md-4">Leave Type: <font color="green">{{sick.Leave_type}} </font></div>
+        <div class="col-md-4">Department: <font color="green">{{sick.department}} </font></div>
          <div class="col-md-3"><span class="pull-right">Date:<font color="blue">{% now "jS F Y" %}</font></span></div>
 
 
@@ -41,29 +43,26 @@
 
         <br>
        <br>
-       {% for sick in display_sick%}
+       {% for sick in report%}
   <table class="table">
   <thead>
     <tr>
-      <th scope="col">Department</th>
-      <th scope="col">Date Illness Started</th>
-      <th scope="col">Date Illness End</th>
-        <th scope="col">Description</th>
-        <th scope="col"> Number of days</th>
-        <th scope="col">Status </th>
-        <th scope="col">Authorized By </th>
+
+      <th scope="col">Launch Date</th>
+      <th scope="col">Total number of working days paid</th>
+        <th scope="col">Paid Amount</th>
+        <th scope="col"> Processed Date</th>
+
     </tr>
   </thead>
   <tbody>
     <tr>
 
-      <td>{{sick.department}}</td>
-      <td>{{sick.Date_illness_began}}</td>
-      <td>{{sick.Date_illness_end}}</td>
-        <td>{{sick.Brief_explanation_of_illness}}</td>
-        <td>{{sick.Total_working_days}}</td>
-        <td>{{sick.Manager_Authorization_Status}}</td>
-        <td>{{sick.Authorized_by_Manager}}</td>
+      <td>{{sick.Todays_date}}</td>
+      <td>{{sick.total_number_of_days}}</td>
+      <td>$ {{sick.paid_amount|intcomma}}</td>
+        <td>{{sick.payment_date}}</td>
+
     </tr>
 
   </tbody>
@@ -75,14 +74,14 @@
 
 </div>
 
-<br><br><br><br><br><br>
+<br><br><br>
 
 
-{%for sick in display_sick%}
+{%for sick in report%}
 <div class="container ">
                       <div class="row">
-                      <div class="col-md-3">Director Authorization Status: </div>
-                        <div class="col-md-3"><font color="green">{{sick.Director_Authorization_Status}} </font> </div>
+                      <div class="col-md-3">Status: </div>
+                        <div class="col-md-3"><font color="green">{{sick.approval_status}} </font> </div>
 
 
                       </div>
@@ -93,14 +92,21 @@
 <div class="container ">
                       <div class="row">
                           <div class="col-md-3">Authorized By Director:</div>
-                          {%for sick in display_sick%}
-                          <div class="col-md-3">{{sick.Authorized_by_Director}}</div>
-                            {%endfor%}
+
+                          {%for sick in report%}
+                           <div class="col-md-3">{{sick.Authorize_by_Commissioner}}</div>
+
                       </div>
+                     <div class="row">
+                         <div class="col-md-3">Authorized Date:</div>
+                          <div class="col-md-3">{{sick.Authorized_Date}}</div>
+                            {%endfor%}
+                     </div>
             </div>
 
 
 
 </body>
+
 
 </html>

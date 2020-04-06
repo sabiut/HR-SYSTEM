@@ -27,7 +27,7 @@ class leave_encashment_form(forms.ModelForm):
 class director_authorize_encashment_form(forms.ModelForm):
     class Meta:
         model = encashment
-        fields = ['approval_status', 'Authorize_by_Commissioner', 'Authorized_Date']
+        fields = ['approval_status', 'Authorize_by', 'Authorized_Date']
         widgets = {
             'Authorized_Date': DateInput()
         }

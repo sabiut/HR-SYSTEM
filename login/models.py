@@ -350,7 +350,7 @@ class encashment(models.Model):
 
     )
     approval_status = models.CharField(max_length=100, choices=status, default='Pending', blank=False)
-    Authorize_by_Commissioner = models.CharField(max_length=100, null=True)
+    Authorize_by= models.CharField(max_length=100, null=True)
     Authorized_Date = models.DateField(null=True, blank=False)
     review = (
         ('Processing', 'Processing'),

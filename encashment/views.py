@@ -52,7 +52,7 @@ def send_encashment_email_to_Director(request):
                                                                                          "Encashment. "
                                                                                          "Please "
                                                                                          "login to "
-                                                                                         "http://ec2-18-212-65-46.compute-1.amazonaws.com/ to "
+                                                                                         "http://127.0.0.1:8000/ to "
                                                                                          "Authorize the leave "
                                                                                          "encashment.",
                       "Annual Leave Encashment  <eleavesystem@rbv.gov.vu>",
@@ -61,6 +61,12 @@ def send_encashment_email_to_Director(request):
 
 @login_required(login_url='home')
 def pending_encashments_athorizer(request):
+    pending_encashments = encashment.objects.filter(approval_status='Pending')
+    return render(request, 'my_pending_encashments_auth.html', {'pending_encashments': pending_encashments})
+
+
+@login_required(login_url='home')
+def pending_encashments_director(request):
     pending_encashments = encashment.objects.filter(approval_status='Pending')
     return render(request, 'pending_encashments.html', {'pending_encashments': pending_encashments})
 
@@ -108,18 +114,18 @@ def director_authorize_encashment(request, staff_id):
 def director_send_encashment_email_to_staff(request, staff_id):
     to_emails = staff_id.user.email
     if staff_id.approval_status == 'Approved':
-        send_mail("leave Encashment approved by Governor" + " " + staff_id.Authorize_by_Commissioner,
-                  "We have good news for you, the Commissioner Mr" + " " + staff_id.Authorize_by_Commissioner + " " + "have " + staff_id.approval_status
+        send_mail("leave Encashment approved by Director" + " " + staff_id.Authorize_by,
+                  "We have good news for you, the Director Mr" + " " + staff_id.Authorize_by + " " + "have " + staff_id.approval_status
                   + " " + " your leave encashment and" + " " +
                   "We have forwarded the encashment application to the Financial Controller to process the payment.",
-                  "VFSC Leave encashment" "<eleavesystem@rbv.gov.vu>",
+                  "Leave encashment" "<eleavesystem@rbv.gov.vu>",
                   [to_emails])
     elif staff_id.approval_status == 'Rejected':
-        send_mail("Leave encashment Application Rejected by" + " " + staff_id.Authorize_by_Commissioner,
+        send_mail("Leave encashment Application Rejected by" + " " + staff_id.Authorize_by,
                   "We have bad news for you, Your leave encashment have been {}".format(
-                      staff_id.approval_status) + " " + "by the Commissioner {}".format(
-                      staff_id.Authorize_by_Commissioner) + ". " + "\n Consult the Commissioner for more"
-                                                                   "information."
+                      staff_id.approval_status) + " " + "by the Director {}".format(
+                      staff_id.Authorize_by) + ". " + "\n Consult the Director for more"
+                                                      "information."
                   ,
                   "Leave encashment <eLeavesystem@rbv.gov.vu>", [to_emails], fail_silently=False)
 
@@ -132,11 +138,11 @@ def send_email_to_Financial_Controller(request, staff_id):
         to_send = [a.email]
         if staff_id.approval_status == 'Approved':
             send_mail("Leave encashment",
-                      "The Governor Mr " + " " + staff_id.Authorize_by_Commissioner + " " + "have " + staff_id.approval_status
+                      "The Director Mr " + " " + staff_id.Authorize_by + " " + "have " + staff_id.approval_status
                       + " " + staff_id.user.first_name + "'s" + " " + "leave encashment and we have forwarded it to you "
                                                                       "to process the payment "
                                                                       "\n" +
-                      "Please login to http://ec2-18-212-65-46.compute-1.amazonaws.com/ to process the leave encashment.",
+                      "Please login to http://127.0.0.1:8000/.",
                       "Leave encashment " "<eleavesystem@vfsc.vu>",
                       to_send)
 
@@ -210,3 +216,9 @@ def calculate_updated_leave_Balance(staff_id):
     get_user = Leave_Balance.objects.get(user=set_user)
     get_user.Leave_current_balance = get_user.Leave_current_balance - update_balance.total_number_of_days
     get_user.save()
+
+
+@login_required(login_url='home')
+def encashment_report(request, staff_id):
+    report = encashment.objects.filter(id=staff_id)
+    return render(request, 'encashment_report.html', {'report': report})

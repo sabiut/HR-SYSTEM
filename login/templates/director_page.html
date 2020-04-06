@@ -55,7 +55,7 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="http://ec2-18-212-65-46.compute-1.amazonaws.com/admin/">
+                <a class="nav-link active" href="http://127.0.0.1:8000/admin">
 
                    <i class="fas fa-user-cog"></i>
 
@@ -227,7 +227,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New Holidays Holidays</h5>
+        <h5 class="modal-title" id="exampleModalLabel">New Holidays</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -374,7 +374,7 @@
                                     <div class="card-header" >
                                     <ul class="nav nav-pills card-header-pills">
                                         <li class="nav-item">
-                                            <a class="nav-link " href="{%url 'pending_encashments_athorizer'%}"> Leave encashments | <font color="red">Pending Approval inbox({{count_pending_encashment}}) </font></a></a>
+                                            <a class="nav-link " href="{%url 'pending_encashments_director'%}"> Leave encashments | <font color="red">Pending Approval inbox({{count_pending_encashment}}) </font></a></a>
                                         </li>
                                          <li class="nav-item">
                                             <a class="nav-link" href="{%url 'approved_encashments_authorizer'%}" >Approved by Director | <font color="green">Encashments inbox({{count_approved_encashments}})</font></a>

@@ -27,16 +27,18 @@ margin:30px auto
 </style>
 
 </header>
-{% extends "profile_page.html"%}
+{% extends "hr_page.html"%}
 
 {%block content%}
 
 <!-- start modal-->
 
 <!-- Button trigger modal -->
+<!--<a href=""   data-toggle="modal" data-target="#exampleModal">-->
+<!--  <i class="fas fa-calendar-alt"> Annual Public Holidays</i>-->
+<!--</a>-->
 
-
-<!-- Modal -->
+<!--&lt;!&ndash; Modal &ndash;&gt;-->
 <!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
 <!--  <div class="modal-dialog modal-lg" role="document">-->
 <!--    <div class="modal-content">-->
@@ -61,7 +63,7 @@ margin:30px auto
 <div id="main">
 
 <h4><i class="fas fa-tasks" aria-hidden="true"></i>
-Use this form to submit your annual leave encashment application. </h4>
+Use this form to make changes to any leave application </h4>
 <form method="post">
 
   {% csrf_token %}
@@ -71,12 +73,12 @@ Use this form to submit your annual leave encashment application. </h4>
   {{user_form.as_table}}<br><br>
 
 
-  {{encashment_form.as_table}}
+  {{form.as_table}}
 
 </table><br>
 
 
-<input class="btn btn-primary btn-lg" role="button" type="submit" name="submit" value="Submit Application" >
+<input class="btn btn-primary btn-lg" role="button" type="submit" name="submit" value="Save Record" >
 
 </form>
 

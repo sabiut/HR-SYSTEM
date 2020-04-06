@@ -80,10 +80,10 @@ $(function () {
 
 
 </head>
-{% extends "director_page.html"%}
+{% extends "profile_page.html"%}
 
 {%block content%}
-
+{% load humanize %}
 <div class="container">
     <!-- setup view report start-->
     <div class="container">
@@ -131,6 +131,8 @@ $(function () {
   <table class="table" id="tblCustomers">
     <thead>
       <tr class="info">
+        <!--<th>Action</th>-->
+          <!--<th>Drop</th>-->
         <th>First Name</th>
         <th>Last Name</th>
           <th>Department</th>
@@ -138,18 +140,27 @@ $(function () {
         <th>Number of days</th>
         <th>Status </th>
 
+          <th>Status</th>
+          <th>Amount</th>
+          <th> Process Date</th>
+
       </tr>
     </thead>
     {%for leave in  pending_encashments%}
 
     <tbody>
       <tr class="success">
+       <!--<td><a href="{% url 'authorize_encashment' leave.id %}"><i class="fas fa-tools"></i></a></td>-->
+         <!-- <td><a href="{% url 'drop_staff_education' leave.id %}"><i class="fas fa-trash-alt"></i></a></td>-->
           <td>{{leave.user.first_name}} </td>
             <td>{{leave.user.last_name}}</td>
-            <td>{{leave.department}}</td>
+          <td>{{leave.department}}</td>
         <td>{{leave.Todays_date}}</td>
         <td>{{leave.total_number_of_days}}</td>
         <td>{{leave.approval_status}}</td>
+          <td>{{leave.processing}}</td>
+          <td>${{leave.paid_amount|intcomma}}</td>
+          <td>{{leave.payment_date}}</td>
 
 
     </tbody>

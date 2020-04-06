@@ -80,7 +80,7 @@ $(function () {
 
 
 </head>
-{% extends "director_page.html"%}
+{% extends "profile_page.html"%}
 
 {%block content%}
 
@@ -131,6 +131,7 @@ $(function () {
   <table class="table" id="tblCustomers">
     <thead>
       <tr class="info">
+          <!--<th>Drop</th>-->
         <th>First Name</th>
         <th>Last Name</th>
           <th>Department</th>
@@ -144,9 +145,10 @@ $(function () {
 
     <tbody>
       <tr class="success">
+         <!-- <td><a href="{% url 'drop_staff_education' leave.id %}"><i class="fas fa-trash-alt"></i></a></td>-->
           <td>{{leave.user.first_name}} </td>
             <td>{{leave.user.last_name}}</td>
-            <td>{{leave.department}}</td>
+          <td>{{leave.department}}</td>
         <td>{{leave.Todays_date}}</td>
         <td>{{leave.total_number_of_days}}</td>
         <td>{{leave.approval_status}}</td>
