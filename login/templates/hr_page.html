@@ -58,7 +58,7 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="http://ec2-18-212-65-46.compute-1.amazonaws.com/admin/">
+                <a class="nav-link active" href="http://127.0.0.1:8000/admin/">
 
                    <i class="fas fa-user-cog"></i>
 
@@ -134,7 +134,7 @@
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{%url 'staff_balance' %}">
                   <i class="fas fa-chart-area"></i>
                   Staff leave balance
                 </a>
@@ -165,13 +165,13 @@
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url 'sick_leave_balances'%}">
                   <i class="fas fa-balance-scale"></i>
                   Sick leave Balance
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url 'update_sick_leave_balance'%}">
                    <i class="fas fa-user-edit"></i>
                   Update Balance
                 </a>
@@ -181,22 +181,6 @@
             </ul>
 
 
-
-<!--            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">-->
-<!--              <span>Staff Information</span>-->
-<!--              <a class="d-flex align-items-center text-muted" href="#">-->
-<!--                <i class="fas fa-tasks"></i>-->
-<!--              </a>-->
-<!--            </h6>-->
-<!--            <ul class="nav flex-column mb-2">-->
-<!--              <li class="nav-item">-->
-<!--                <a class="nav-link" href="#">-->
-<!--                  <i class="fas fa-info"></i>-->
-<!--                  Staff Information-->
-<!--                </a>-->
-<!--              </li>-->
-
-<!--            </ul>-->
 
             <hr>
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">

@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'sickleave',
     'encashment',
     'personal_info',
-    'Hr_office'
+    'Hr_office',
+    'staff_balance'
 ]
 
 MIDDLEWARE = [

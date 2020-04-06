@@ -7,7 +7,8 @@ from django.shortcuts import render
 from sickleave.forms import sick_leave_form
 from leaveform.forms import User_form
 
-from login.models import SickLeave
+from login.models import SickLeave, Sick_leave_balance
+from .forms import update_sick_leave_form
 
 
 @login_required(login_url='home')
@@ -101,3 +102,26 @@ def sick_leave_pending_director_approval(request):
 def display_sick_leave(request):
     sick_leaves = SickLeave.objects.all()
     return render(request, 'display_sick_leave.html', {'sick_leaves': sick_leaves})
+
+
+@login_required(login_url='home')
+def update_sick_leave_balance(request):
+    if request.POST:
+        form = update_sick_leave_form(request.POST)
+        if form.is_valid():
+            my_field = form.cleaned_data['user']
+            my_balance = form.cleaned_data['yearly_balance']
+            calculate_sick_leave_balance(my_field, my_balance)
+            form.save()
+            return render(request, "successful.html")
+    else:
+        form = update_sick_leave_form
+    return render(request, 'update_sick_leave_form.html', {'form': form})
+
+
+def calculate_sick_leave_balance(get_id, balance):
+    get_id = get_id
+    my_balance = balance
+    get_sick_leave_balance_id = Sick_leave_balance.objects.get(user_id=get_id)
+    get_sick_leave_balance_id.sick_leave_balance = my_balance
+    get_sick_leave_balance_id.save()
