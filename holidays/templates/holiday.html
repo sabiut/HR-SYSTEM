@@ -1,0 +1,39 @@
+
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">List of National Holidays in New Zealand</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+<!--<h2>Reserve Bank Holiday Info</h2>
+  <p>List of Annual holiday.</p>-->
+  <table class="table" id="tblCustomers">
+    <thead>
+      <tr>
+        <th>Day</th>
+        <th>Date</th>
+          <th>Holiday Name</th>
+        <th>Type</th>
+        <th>Comments</th>
+
+      </tr>
+    </thead>
+    {%for leave in holidays%}
+
+    <tbody>
+      <tr class="success">
+        <td>{{leave.day}}</td>
+        <td>{{leave.date}}</td>
+          <td>{{leave.holiday_name}}</td>
+        <td>{{leave.holiday_type}}</td>
+        <td>{{leave.comment}}</td>
+
+    </tbody>
+    {%endfor%}
+
+  </table>
+
+<div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+</div>

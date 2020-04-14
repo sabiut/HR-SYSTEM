@@ -95,7 +95,7 @@
 <!--              </li>-->
 
                 <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">
+                <a class="nav-link" href="{% url 'view_holidays_hr'%}" data-toggle="modal" data-target="#exampleModal">
                   <i class="fas fa-list-ul"></i>
                   Public Holidays
                 </a>
@@ -262,7 +262,7 @@
 
     <tr class="success">
     <td>
-        <form action="#" method="post">{% csrf_token %}
+        <form action="{%url 'select_an_option'%}" method="post">{% csrf_token %}
 
 
 
@@ -282,7 +282,7 @@
     <!--Security form-->
 
     <td>
-        <form action="#" method="post">{% csrf_token %}
+        <form action="{%url 'select_leave_and_department'%}" method="post">{% csrf_token %}
 
 
 
@@ -294,11 +294,11 @@
             </select>
       Select a Department:
             <select name="sel_department">
-                 <option value="GOV">GOV</option>
-                    <option value="FRD">FRD</option>
-                     <option value="ERD">ERD</option>
-                   <option value="DSS">DSS</option>
-                <option value="FMD">FMD</option>
+                 <option value="Finance">Finance</option>
+                    <option value="ICT">ICT</option>
+                     <option value="Research">Research</option>
+                   <option value="Marketing">Marketing</option>
+
 
             </select>
 
@@ -340,7 +340,7 @@
 
 
 <!-- modal Start -->
-<a href="#"   data-toggle="modal" data-target="#exampleModal">
+<a href="{% url 'holidays'%}"   data-toggle="modal" data-target="#exampleModal">
   <i class="fas fa-calendar-alt"> Annual Public Holidays</i>
 </a>
 

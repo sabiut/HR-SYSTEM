@@ -27,7 +27,7 @@ urlpatterns = [
     #path(r'', include('staffinfo.urls')),
     path(r'', include('sickleave.urls')),
     path(r'', include('staff_balance.urls')),
-    # path(r'', include('holidays.urls')),
+    path(r'', include('holidays.urls')),
     path(r'', include('personal_info.urls')),
     path(r'', include('encashment.urls')),
     # path(r'', include('loans.urls')),

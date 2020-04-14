@@ -1,0 +1,73 @@
+
+
+      <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New Zealand National Holidays</h5>
+          <div class="row">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-3"></div>
+              <div class="col-sm-6">
+          <span class="pull-right"><a href="{%url 'add_holiday'%}" ><i class="fas fa-plus-square"></i>Add Holiday</a></span>
+              </div>
+          </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+<!--<h2>Reserve Bank Holiday Info</h2>
+  <p>List of Annual holiday.</p>-->
+  <table class="table" id="tblCustomers">
+    <thead>
+      <tr>
+          <th>Action</th>
+          <th>Drop</th>
+        <th>Day</th>
+        <th>Date</th>
+          <th>Holiday Name</th>
+        <th>Type</th>
+        <th>Comments</th>
+
+      </tr>
+    </thead>
+    {%for leave in holidays%}
+
+    <tbody>
+      <tr class="success">
+          <td><a href="{% url 'update_holiday' leave.id %}"> <i class="fas fa-edit"></i></a></td>
+          <td><a href="{% url 'drop_holiday' leave.id %}"> <i class="fas fa-trash-alt"></i></a></td>
+        <td>{{leave.day}}</td>
+        <td>{{leave.date}}</td>
+          <td>{{leave.holiday_name}}</td>
+        <td>{{leave.holiday_type}}</td>
+        <td>{{leave.comment}}</td>
+
+    </tbody>
+    {%endfor%}
+
+  </table>
+
+<div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+</div>
+
+
+      <!-- Modal Add-->
+<div class="modal fade" id="Add_holiday" tabindex="-1" role="dialog" aria-labelledby="Add_holiday" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="Add_holiday_label">Annual Holidays</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body ">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal-->
