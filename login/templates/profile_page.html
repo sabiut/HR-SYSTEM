@@ -147,7 +147,7 @@
 
                        <div class="col-lg-3">Annual Leave Balance: <font color="red">{{profile_info.Leave_current_balance|floatformat:2}} days</font></div>
                        <div class="col-lg-3">Monthly Entitlement: <font color="red">{{entitlements.entitlement}}</font> </div>
-                        <div class="col-lg-3">Medical Entitlement: <font color="red">{{medical_entitlement.annual_entitlement|intcomma}} $</font> </div>
+                        <div class="col-lg-3">Medical Entitlement: <font color="red">${{medical_entitlement.annual_entitlement|intcomma}}</font> </div>
                        <div class="col-lg-3">Sick Leave Balance: <font color="red">{{sick_leave_balance.sick_leave_balance}} days</font> </div>
 
                      </div>
@@ -392,7 +392,7 @@
                                     <div class="card-header" >
                                     <ul class="nav nav-pills card-header-pills">
                                         <li class="nav-item">
-                                            <a class="nav-link " href=""> Medical Scheme | <font color="red">Processed Medical details inbox({{count_processed_medical}}) </font></a></a>
+                                            <a class="nav-link " href="{%url 'processed_medical_details_profile'%}"> Medical Scheme | <font color="red">Processed Medical details inbox({{count_processed_medical}}) </font></a></a>
                                         </li>
                                     </ul>
                                      </div>

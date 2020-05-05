@@ -11,6 +11,7 @@ from django.contrib.auth.models import User, Group
 import socket
 
 # Home page
+from medical_scheme.models import medical_details
 from .models import NewLeave, SickLeave, encashment
 
 
@@ -70,7 +71,7 @@ def director_page(request):
             profile_info = request.user.leave_balance
             entitlements = request.user.monthly_entitlement
             sick_leave_balance = request.user.sick_leave_balance
-            # medical_entitlement = request.user.medical_entitlement
+            medical_entitlement = request.user.medical_entitlement
             info = request.user
             query_set = Group.objects.filter(user=request.user)
             get_user_id = request.user.id
@@ -121,7 +122,7 @@ def director_page(request):
             #
             # count_approve_house_loans = Loan_details.objects.filter(Housing_loan_committee_Recommended_for='Approval',
             #                                                         Approval_status='Approved').count()
-            # count_processed_medical = medical_details.objects.filter(user_id=get_user_id, Status='Processed').count()
+            count_processed_medical = medical_details.objects.filter(user_id=get_user_id, Status='Processed').count()
 
             count_director_pending_annual_leave = NewLeave.objects.filter(user_id=get_user_id,
                                                                           user__groups__name='Director').filter(
@@ -151,7 +152,7 @@ def profile_page(request):
             profile_info = request.user.leave_balance
             entitlements = request.user.monthly_entitlement
             sick_leave_balance = request.user.sick_leave_balance
-            # medical_entitlement = request.user.medical_entitlement
+            medical_entitlement = request.user.medical_entitlement
             info = request.user
             query_set = Group.objects.filter(user=request.user)
             get_user_id = request.user.id
@@ -199,7 +200,7 @@ def profile_page(request):
             # count_approved_house_loans = Loan_details.objects.filter(user_id=get_user_id,
             #                                                          Housing_loan_committee_Recommended_for='Approval',
             #                                                          Approval_status='Approved').count()
-            # count_processed_medical = medical_details.objects.filter(user_id=get_user_id, Status='Processed').count()
+            count_processed_medical = medical_details.objects.filter(user_id=get_user_id, Status='Processed').count()
 
             return render(request, "profile_page.html", locals())
         except ObjectDoesNotExist:
@@ -215,7 +216,7 @@ def authorizer_page(request):
             profile_info = request.user.leave_balance
             entitlements = request.user.monthly_entitlement
             sick_leave_balance = request.user.sick_leave_balance
-            # medical_entitlement = request.user.medical_entitlement
+            medical_entitlement = request.user.medical_entitlement
             info = request.user
             query_set = Group.objects.filter(user=request.user)
             get_user_id = request.user.id
@@ -270,7 +271,7 @@ def authorizer_page(request):
             count_approved_encashment_profile = encashment.objects.filter(user_id=get_user_id,
                                                                           approval_status='Approved').count()
 
-            # count_processed_medical = medical_details.objects.filter(user_id=get_user_id, Status='Processed').count()
+            count_processed_medical = medical_details.objects.filter(user_id=get_user_id, Status='Processed').count()
 
             count_authorier_pending_sick = SickLeave.objects.filter(user_id=get_user_id,
                                                                     user__groups__name='authorizer').filter(
@@ -298,7 +299,7 @@ def hr(request):
         try:
             profile_info = request.user.leave_balance
             entitlements = request.user.monthly_entitlement
-            # medical_entitlement = request.user.medical_entitlement
+            medical_entitlement = request.user.medical_entitlement
             info = request.user
             sick_leave_balance = request.user.sick_leave_balance
             get_user_id = request.user.id
@@ -313,7 +314,7 @@ def hr(request):
             count_approved_encashment_profile = encashment.objects.filter(user_id=get_user_id,
                                                                           approval_status='Approved').count()
 
-            # count_processed_medical = medical_details.objects.filter(user_id=get_user_id, Status='Processed').count()
+            count_processed_medical = medical_details.objects.filter(user_id=get_user_id, Status='Processed').count()
 
             count_hr_pending_leave = NewLeave.objects.filter(user_id=get_user_id,
                                                              Manager_Authorization_Status="Pending").count()

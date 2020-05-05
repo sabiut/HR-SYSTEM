@@ -32,7 +32,7 @@ urlpatterns = [
     path(r'', include('encashment.urls')),
     # path(r'', include('loans.urls')),
     # path(r'', include('housing_loan.urls')),
-    # path(r'', include('medical_scheme.urls'))
+    path(r'', include('medical_scheme.urls'))
 
 ]
 

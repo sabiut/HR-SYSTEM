@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'personal_info',
     'Hr_office',
     'staff_balance',
-    'holidays'
+    'holidays',
+    'medical_scheme'
 ]
 
 MIDDLEWARE = [

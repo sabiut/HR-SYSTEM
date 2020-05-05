@@ -13,6 +13,7 @@ from login.models import encashment, Leave_Balance
 
 
 # from medical_scheme.models import medical_details
+from medical_scheme.models import medical_details
 
 
 @login_required(login_url='home')
@@ -155,12 +156,12 @@ def financial_controller(request):
             all_approved_encashments = encashment.objects.filter(approval_status="Approved",
                                                                  processing="Processing").count()
             all_process = encashment.objects.filter(approval_status="Approved", processing='Completed').count()
-            # count_medical_details = medical_details.objects.filter(Status='Review').count()
-            # count_process_medicals = medical_details.objects.filter(Status='Processed').count()
+            count_medical_details = medical_details.objects.filter(Status='Review').count()
+            count_process_medicals = medical_details.objects.filter(Status='Processed').count()
             c = {'all_approved_encashments': all_approved_encashments,
-                 'all_process': all_process
-                 # 'count_medical_details': count_medical_details,
-                 # 'count_process_medicals': count_process_medicals
+                 'all_process': all_process,
+                 'count_medical_details': count_medical_details,
+                 'count_process_medicals': count_process_medicals
                  }
             return render(request, 'financial_controller.html', c)
         else:

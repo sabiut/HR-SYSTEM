@@ -24,10 +24,10 @@
                          <i class="fas fa-file-invoice"></i> Approved Encashments | inbox({{all_approved_encashments}})</a></span>
                       </div>
 
-                    <div class="col-sm-4">
-                          <span class="pull-left"> <a data-toggle="collapse" href="#medical_scheme" role="button" aria-expanded="false" aria-controls="collapseExample">
-                         <i class="fas fa-first-aid"></i> Medical Scheme | inbox({{count_medical_details}})</a></span>
-                      </div>
+<!--                    <div class="col-sm-4">-->
+<!--                          <span class="pull-left"> <a data-toggle="collapse" href="#medical_scheme" role="button" aria-expanded="false" aria-controls="collapseExample">-->
+<!--                         <i class="fas fa-first-aid"></i> Medical Scheme | inbox({{count_medical_details}})</a></span>-->
+<!--                      </div>-->
 
 
 
@@ -61,10 +61,10 @@
                                     <div class="card-header" >
                                     <ul class="nav nav-pills card-header-pills">
                                        <li class="nav-item">
-                                        <a class="nav-link " href="{%url 'all_medical_details'%}"> Medical Details | <font color="red">Pending Process inbox({{count_medical_details}}) </font></a></a>
+                                        <a class="nav-link " href="#"> Medical Details | <font color="red">Pending Process inbox({{count_medical_details}}) </font></a></a>
                                         </li>
                                        <li class="nav-item">
-                                          <a class="nav-link" href="{% url 'processed_medicals'%}">Finish Processed | <font color='green'>inbox({{count_process_medicals}})</font></a>
+                                          <a class="nav-link" href="#">Finish Processed | <font color='green'>inbox({{count_process_medicals}})</font></a>
                                         </li>
 
                                         </ul>

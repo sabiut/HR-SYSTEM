@@ -1,0 +1,56 @@
+<header>
+
+  <!--font awesome-->
+
+  <!-- font owesone-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--font owesome end-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <!--end font awesome-->
+
+
+<style type ="text/css">
+
+#main{
+width:910px;
+height:620px;
+margin:30px auto
+}
+</style>
+
+</header>
+{% extends "authorizer_page.html"%}
+
+{%block content%}
+{% load mathfilters %}
+<div id="main">
+
+<h3 class="card-header"><i class="fas fa-tasks" aria-hidden="true"></i>
+
+User this form to process staff medical details. </h3>
+
+
+
+<div class="alert alert-success" role="alert">
+  <!---<h4 class="alert-heading"></h4>-->
+
+<form method="post">
+  <br><br>
+
+  {% csrf_token %}
+
+  <table>
+
+  {{form.as_table}}<br>
+
+
+</table><br>
+<input class="btn btn-primary btn-lg" role="button" type="submit" name="submit" value="Finish Processing" >
+
+</form>
+
+</div>
+</div>
+
+
+{%endblock%}
