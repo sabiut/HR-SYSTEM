@@ -1,0 +1,173 @@
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <!-- setup PDF file-->
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+    <!-- end PDF file-->
+
+
+    <!--set up excel-->
+    <script>
+       function exportTableToExcel(tblCustomers, filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tblCustomers);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+    // Specify file name
+    filename = filename?filename+'.xls':'sick_leaves.xls';
+
+    // Create download link element
+    downloadLink = document.createElement("a");
+
+    document.body.appendChild(downloadLink);
+
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+        // Setting the file name
+        downloadLink.download = filename;
+
+        //triggering the function
+        downloadLink.click();
+    }
+}
+    </script>
+
+<!-- End file set up excel_file-->
+
+    <!-- jquery printer setup -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- test setup printer-->
+
+
+    <script>
+$(function () {
+    $('button[type="submit"]').click(function () {
+        var pageTitle = 'Staff Sick leave',
+            stylesheet = '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css',
+            win = window.open('', 'Print', 'width=500,height=300');
+        win.document.write('<html><head><title>' + pageTitle + '</title>' +
+            '<link rel="stylesheet" href="' + stylesheet + '">' +
+            '</head><body>' + $('#tblCustomers')[0].outerHTML + '</body></html>');
+
+        win.document.close();
+        win.print();
+        win.close();
+        return false;
+    });
+});
+
+
+    </script>
+    <!-- end test setup printer-->
+
+</head>
+{% extends "director_page.html"%}
+
+{%block content%}
+
+<div class="container">
+   <!--alll leave table start-->
+<div class="container">
+    <!-- setup view report start-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6"></div>
+
+                <div class="col-md-5">
+
+                    <span class="pull-right"><button class="btn btn-sm pull-left btn-default" type="submit"><i class="fas fa-print"> Print </i> </button>  </span>
+
+                    <span class="pull-right"><a href="#"  onclick="exportTableToExcel('tblCustomers')"><i style="font-size:20px" class="fa">&#xf1c3;</i> Excel File</a></span>
+                    <!-- setup PDF file-->
+                    <span class="pull-right"> <a href="#" id="btnExport"><i style="font-size:20px" class="fas fa-file-pdf"></i> PDF </a> | </span>
+                    <script type="text/javascript">
+                        $("body").on("click", "#btnExport", function () {
+                            html2canvas($('#tblCustomers')[0], {
+                                onrendered: function (canvas) {
+                                    var data = canvas.toDataURL();
+                                    var docDefinition = {
+                                        content: [{
+                                            image: data,
+                                            width: 500
+                                        }]
+                                    };
+                                    pdfMake.createPdf(docDefinition).download("sick_leave.pdf");
+                                }
+                            });
+                        });
+                    </script>
+                    <!-- end setup PDF file-->
+
+
+
+                </div>
+
+
+        </div>
+
+
+    </div>
+
+    <!-- view report end-->
+  <h2>Approved Sick Leaves</h2>
+  <p>List of all approved sick leaves.</p>
+  <table class="table" id="tblCustomers">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+          <th>Launch Date</th>
+        <th>Leave Type</th>
+        <th>Department</th>
+        <th>Date Illness Start</th>
+        <th>Date Illness End</th>
+        <th>Total work days</th>
+        <th>Leave Description</th>
+          <th>Medical certification</th>
+          <th>Authorization Status</th>
+          <th>Authorize By</th>
+          <th>Director authorization status</th>
+          <th>Authorize By Director</th>
+
+      </tr>
+    </thead>
+    {%for leave in all_approved_sick_leaves%}
+
+    <tbody>
+      <tr class="success">
+        <td>{{leave.user.first_name}}</td>
+        <td>{{leave.user.last_name}}</td>
+          <td>{{leave.Todays_Date}}</td>
+        <td>{{leave.Leave_type}}</td>
+        <td>{{leave.department}}</td>
+        <td>{{leave.Date_illness_began}}</td>
+        <td>{{leave.Date_illness_end}}</td>
+        <td>{{leave.Total_working_days}}</td>
+        <td>{{leave.Brief_explanation_of_illness}}</td>
+          <td><a href=" {{ leave.medical_certification.url }}" class="btn btn-primary btn-sm" target="_blank"><i class="fas fa-cloud-download-alt"></i> Download PDF</a> </td>
+          <td>{{leave.Manager_Authorization_Status}}</td>
+          <td>{{leave.Authorized_by_Manager}}</td>
+          <td>{{leave.Director_Authorization_Status}}</td>
+          <td>{{leave.Authorized_by_Director}}</td>
+
+
+
+    </tbody>
+    {%endfor%}
+
+  </table>
+</div>
+
+{%endblock%}

@@ -99,6 +99,24 @@ def sick_leave_pending_director_approval(request):
 
 
 @login_required(login_url='home')
+def display_approved_sick_leaves(request):
+    query_set = Group.objects.filter(user=request.user)
+    all_approved_sick_leaves = SickLeave.objects.filter(
+                                                        Manager_Authorization_Status="Approved",
+                                                        Director_Authorization_Status="Approved")
+    return render(request, 'all_approved_sick_leaves.html', {'all_approved_sick_leaves': all_approved_sick_leaves})
+
+
+@login_required(login_url='home')
+def sick_to_approved_by_director(request):
+    query_set = Group.objects.filter(user=request.user)
+    sick_leaves = SickLeave.objects.filter(
+        Manager_Authorization_Status="Approved",
+        Director_Authorization_Status='Pending')
+    return render(request, 'display_sick_leave_authorizer_page.html', {'sick_leaves': sick_leaves})
+
+
+@login_required(login_url='home')
 def display_sick_leave(request):
     sick_leaves = SickLeave.objects.all()
     return render(request, 'display_sick_leave.html', {'sick_leaves': sick_leaves})

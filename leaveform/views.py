@@ -8,7 +8,7 @@ from django.contrib.auth.models import Group
 from django.template.context_processors import csrf
 
 from .forms import *
-from login.models import Leave_Balance
+from login.models import Leave_Balance, SickLeave
 
 
 @login_required(login_url='home')
@@ -119,3 +119,67 @@ def filter_manager_approved_annual_leave(request):
     in_group = NewLeave.objects.filter(department=query_set[2], user__groups__name='authorizer').filter(
         Director_Authorization_Status='Approved')
     return render(request, 'manager_approved_annual_leave_director.html', {'in_group': in_group})
+
+
+@login_required(login_url='home')
+def filter_annual_authorizer(request):
+    query_set = Group.objects.filter(user=request.user)
+    in_group = NewLeave.objects.filter(user__groups__name='authorizer').filter(
+        Director_Authorization_Status='Pending')
+    return render(request, 'manager_annual_leave.html', {'in_group': in_group})
+
+
+@login_required(login_url='home')
+def filter_pending_annual_leave_managers(request):
+    get_user_id = request.user.id
+    in_group = NewLeave.objects.filter(user_id=get_user_id, user__groups__name='authorizer').filter(
+        Director_Authorization_Status='Pending')
+    return render(request, 'manager_pending_annual_leave.html', {'in_group': in_group})
+
+
+@login_required(login_url='home')
+def filter_manager_approved_annual_leave(request):
+    query_set = Group.objects.filter(user=request.user)  # added that to filter by department
+    in_group = NewLeave.objects.filter(user__groups__name='authorizer').filter(
+        Director_Authorization_Status='Approved')
+    return render(request, 'manager_approved_annual_leave_director.html', {'in_group': in_group})
+
+
+@login_required(login_url='home')
+def filter_approved_manager_annual_leave(request):
+    get_user_id = request.user.id
+    in_group = NewLeave.objects.filter(user_id=get_user_id, user__groups__name='authorizer').filter(
+        Director_Authorization_Status='Approved')
+    return render(request, 'manager_approved_annual_leave.html', {'in_group': in_group})
+
+
+@login_required(login_url='home')
+def filter_sick_authorizer(request):
+    # query_set = Group.objects.filter(user=request.user)  # added that to filter by department
+    in_group = SickLeave.objects.filter(user__groups__name='authorizer').filter(
+        Director_Authorization_Status='Pending')
+    return render(request, 'manager_sick_leave.html', {'in_group': in_group})
+
+
+@login_required(login_url='home')
+def manager_approved_sick_leave(request):
+    # query_set = Group.objects.filter(user=request.user)
+    in_group = SickLeave.objects.filter(user__groups__name='authorizer').filter(
+        Director_Authorization_Status='Approved')
+    return render(request, 'manager_approved_sick_leave_director.html', {'in_group': in_group})
+
+
+@login_required(login_url='home')
+def filter_pending_authorizer_sick_leave(request):
+    get_user_id = request.user.id
+    in_group = SickLeave.objects.filter(user_id=get_user_id, user__groups__name='authorizer').filter(
+        Director_Authorization_Status='Pending')
+    return render(request, 'manager_sick_leave.html', {'in_group': in_group})
+
+
+@login_required(login_url='home')
+def manager_approved_sick_leave_authorizer_page(request):
+    get_user_id = request.user.id
+    in_group = SickLeave.objects.filter(user_id=get_user_id, user__groups__name='authorizer').filter(
+        Director_Authorization_Status='Approved')
+    return render(request, 'manager_approved_sick_leave_director.html', {'in_group': in_group})

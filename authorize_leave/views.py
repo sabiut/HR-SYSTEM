@@ -80,10 +80,10 @@ def send_email_to_Director(request, staff_id):
 
 @login_required(login_url='home')
 def Tobeapprovebydirector(request):
-    query_set = Group.objects.filter(user=request.user)
-    all_manager_approved_leaves = NewLeave.objects.filter(department=query_set[2],
-                                                          Manager_Authorization_Status="Approved",
-                                                          Director_Authorization_Status='Pending')
+    # query_set = Group.objects.filter(user=request.user)
+    all_manager_approved_leaves = NewLeave.objects.filter(
+        Manager_Authorization_Status="Approved",
+        Director_Authorization_Status='Pending')
     return render(request, 'tobe_approvebydirector.html', locals())
 
 
@@ -137,8 +137,8 @@ def director_send_email_to_staff(request, staff_id):
 
 @login_required(login_url='home')
 def approved_leaves(request):
-    query_set = Group.objects.filter(user=request.user)
-    approvedleaves = NewLeave.objects.filter(department=query_set[2], Manager_Authorization_Status="Approved",
+    # query_set = Group.objects.filter(user=request.user)
+    approvedleaves = NewLeave.objects.filter(Manager_Authorization_Status="Approved",
                                              Director_Authorization_Status="Approved")
     return render(request, 'approvedleaves.html', locals())
 
@@ -171,7 +171,7 @@ def Unit_manager_approve_sick_Form(request, staff_id):
             calculate_sick_leave_Balance(get_staff_id)
             form.save()
             manager_send_sick_leave_email_to_staff(request, get_staff_id)
-            #Manager_send_sick_leave_email_to_Director(request, get_staff_id)
+            # Manager_send_sick_leave_email_to_Director(request, get_staff_id)
             return render(request, 'manager_success_authorize_sick.html', {'name': name})
 
     else:
@@ -201,6 +201,26 @@ def manager_send_sick_leave_email_to_staff(request, staff_id):
                   "Sick Leave <eLeavesystem@rbv.gov.vu>", [email_staff], fail_silently=False)
 
 
+# Unit Director form to authorize sick leave
+@login_required(login_url='home')
+def unit_Director_authorize_sick_leave_Form(request, staffs_id):
+    if request.method == 'POST':
+        get_staff_id = SickLeave.objects.get(id=staffs_id)
+        form = DirectorForm(request.POST, instance=get_staff_id)
+        name = get_staff_id.user
+        if form.is_valid():
+            calculate_sick_leave_Balance(get_staff_id)
+            form.save()
+            director_send_sick_leave_email_to_staff(request, get_staff_id)  # call email function
+            return render(request, 'director_approved_sick_success.html', {'name': name})
+
+    else:
+        get_staff_id = SickLeave.objects.get(id=staffs_id)
+        form = DirectorForm(instance=get_staff_id)
+
+    return render(request, 'director_authorize_sick_leave_form.html', {'form': form})
+
+
 # update staff sick leave balance on director approval
 def calculate_sick_leave_Balance(staff_id):
     update_balance = staff_id
@@ -208,3 +228,20 @@ def calculate_sick_leave_Balance(staff_id):
     get_user = Sick_leave_balance.objects.get(user=set_user)
     get_user.sick_leave_balance = get_user.sick_leave_balance - update_balance.Total_working_days
     get_user.save()
+
+def director_send_sick_leave_email_to_staff(request, staff_id):
+    to_emails = staff_id.user.email
+    if staff_id.Director_Authorization_Status == 'Approved':
+        send_mail("Sick Leave approved by" + " " + staff_id.Authorized_by_Director,
+                  "We have good news for you, the unit Director" + " " + staff_id.Authorized_by_Director + " " + "have " + staff_id.Director_Authorization_Status
+                  + " " + "your sick leave. \n",
+                  "Sick Leave " "<eleavesystem@rbv.gov.vu>",
+                  [to_emails])
+    elif staff_id.Director_Authorization_Status == 'Rejected':
+        send_mail("Sick Application Rejected by" + " " + staff_id.Authorized_by_Director,
+                  "We have bad news for you, Your sick leave application have been {}".format(
+                      staff_id.Director_Authorization_Status) + " " + "by your Director {}".format(
+                      staff_id.Authorized_by_Director) + ". " + "\n Consult your unit Director for more"
+                                                                "information."
+                  ,
+                  "Sick Leave <eLeavesystem@rbv.gov.vu>", [to_emails], fail_silently=False)

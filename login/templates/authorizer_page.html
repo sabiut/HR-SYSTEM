@@ -39,7 +39,7 @@
  {% load humanize %}
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">DQ Software Consultant</a>
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">COMPX576-20A Project</a>
       <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
@@ -105,7 +105,7 @@
             </h6>
             <ul class="nav flex-column mb-2">
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url 'staff_balances_authorizer'%}">
                   <i class="fas fa-chart-area"></i>
                   Staff Leave Balance
                 </a>
@@ -114,7 +114,7 @@
             </ul>
             <ul class="nav flex-column mb-2">
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url 'sick_leave_balance_authorizer'%}">
                   <i class="fas fa-balance-scale"></i>
                   Sick Leave Balance
                 </a>
@@ -148,21 +148,21 @@
 
             </ul>
 
-              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Loan Applications</span>
-              <a class="d-flex align-items-center text-muted" href="#">
-                <i class="fas fa-balance-scale"></i>
-              </a>
-            </h6>
-            <ul class="nav flex-column mb-2">
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <i class="fas fa-wallet"></i>
-                  Review Loans
-                </a>
-              </li>
+<!--              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">-->
+<!--              <span>Loan Applications</span>-->
+<!--              <a class="d-flex align-items-center text-muted" href="#">-->
+<!--                <i class="fas fa-balance-scale"></i>-->
+<!--              </a>-->
+<!--            </h6>-->
+<!--            <ul class="nav flex-column mb-2">-->
+<!--              <li class="nav-item">-->
+<!--                <a class="nav-link" href="#">-->
+<!--                  <i class="fas fa-wallet"></i>-->
+<!--                  Review Loans-->
+<!--                </a>-->
+<!--              </li>-->
 
-            </ul>
+<!--            </ul>-->
           </div>
         </nav>
 
@@ -362,10 +362,10 @@
                                     <div class="card-header" >
                                     <ul class="nav nav-pills card-header-pills">
                                         <li class="nav-item">
-                                            <a class="nav-link " href="#"> Annual leave | <font color="red">Pending Director Approval inbox({{count_manager_annual_leave}}) </font></a></a>
+                                            <a class="nav-link " href="{%url 'filter_pending_annual_leave_managers'%}"> Annual leave | <font color="red">Pending Director Approval inbox({{count_manager_annual_leave}}) </font></a></a>
                                         </li>
                                          <li class="nav-item">
-                                            <a class="nav-link" href="#" >Approved by Director | <font color="green">Annual Leaves inbox({{count_manager_approved_annual_leave}})</font></a>
+                                            <a class="nav-link" href="{% url 'filter_approved_manager_annual_leave'%}" >Approved by Director | <font color="green">Annual Leaves inbox({{count_manager_approved_annual_leave}})</font></a>
                                          </li>
                                         </ul>
                                      </div>
@@ -383,12 +383,12 @@
                                     <div class="card-header" >
                                    <ul class="nav nav-pills card-header-pills">
                                        <li class="nav-item">
-                                           <a class="nav-link" href="#" >Sick Leaves | <font color="red">Pending Approval inbox({{count_authorier_pending_sick}})</font></a>
+                                           <a class="nav-link" href="{% url 'filter_pending_authorizer_sick_leave'%}" >Sick Leaves | <font color="red">Pending Approval inbox({{count_authorier_pending_sick}})</font></a>
                                         </li>
 
 
                                      <li class="nav-item">
-                                         <a class="nav-link" href="#" >Approved by Director | <font color="green">Sick Leaves inbox({{count_authorizer_approved_sick}})</font></a>
+                                         <a class="nav-link" href="{% url 'authorizer_approved_sick_leaves'%}" >Approved by Director | <font color="green">Sick Leaves inbox({{count_authorizer_approved_sick}})</font></a>
                                         </li>
 
 
@@ -481,7 +481,7 @@
                                     <div class="card-header" >
                                     <ul class="nav nav-pills card-header-pills">
                                         <li class="nav-item">
-                                            <a class="nav-link " href="#"> Medical Scheme | <font color="red">Processed Medical details inbox({{count_processed_medical}}) </font></a></a>
+                                            <a class="nav-link " href="{%url 'processed_medical_details_profile'%}"> Medical Scheme | <font color="red">Processed Medical details inbox({{count_processed_medical}}) </font></a></a>
                                         </li>
                                     </ul>
                                      </div>

@@ -12,7 +12,7 @@ urlpatterns = [
          name='display_sick_leave_Authorizer_page'),
     # path(r'display_sick_leave_Director_Authorizer_page/', views.display_sick_leave_Director_Authorizer_page,
     #      name='sick_to_approved_by_director'),
-    # path(r'display_approved_sick_leaves/', views.display_approved_sick_leaves, name='approved_sick_leaves'),
+    path(r'display_approved_sick_leaves/', views.display_approved_sick_leaves, name='approved_sick_leaves'),
     path(r'sick_leave_pending_director_approval/', views.sick_leave_pending_director_approval,
          name='sick_leave_pending_director_approval'),
     # path(r'display_approved_sick_leaves_authorizer_page/', views.display_approved_sick_leaves_authorizer_page,
@@ -21,6 +21,7 @@ urlpatterns = [
     #      name='display_sick_leave_governor_page'),
     # path(r'display_approved_sick_leaves_governor_page/', views.display_approved_sick_leaves_governor_page,
     #      name='display_approved_sick_leaves_governor_page')
+    path(r'sick_to_approved_by_director/', views.sick_to_approved_by_director, name='sick_to_approved_by_director')
 
 ]
 if settings.DEBUG:

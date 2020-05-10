@@ -1,0 +1,54 @@
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  </head>
+{% extends "authorizer_page.html"%}
+
+{%block content%}
+<div class="container">
+  <h2>Department Managers Leaves</h2>
+  <p>List of all pending Manager's leaves awaiting Director Authorization.</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Leave Type</th>
+        <th>Department</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Total work days</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Authorized by</th>
+        <th>Authorise date</th>
+
+
+      </tr>
+    </thead>
+    {%for leaves in in_group%}
+
+    <tbody>
+      <tr class="success">
+        <td>{{leaves.user.first_name}}</td>
+        <td>{{leaves.user.last_name}}</td>
+
+        <td>{{leaves.Leave_type}}</td>
+        <td>{{leaves.department}}</td>
+        <td>{{leaves.Start_Date}}</td>
+        <td>{{leaves.End_Date}}</td>
+        <td>{{leaves.Total_working_days}}</td>
+        <td>{{leaves.Reason}}</td>
+        <td>{{leaves.Director_Authorization_Status}}</td>
+        <td>{{leaves.Authorized_by_Director}}</td>
+        <td>{{leaves.Date_Authorized}}</td>
+      </tr>
+
+
+
+    </tbody>
+    {%endfor%}
+
+  </table>
+</div>
+
+{%endblock%}

@@ -39,7 +39,7 @@
 {% load humanize %}
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">DQ Software Consultant</a>
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">COMPX576-20A Project</a>
       <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
@@ -55,6 +55,11 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
+
+                   <a class="nav-link" href="http://127.0.0.1:8000/director_page/">
+                  <i class="fas fa-home"></i>
+                  Home
+                </a>
                 <a class="nav-link active" href="http://127.0.0.1:8000/admin">
 
                    <i class="fas fa-user-cog"></i>
@@ -70,19 +75,19 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{%url 'leave_options'%}">
                   <i class="fab fa-wpforms"></i>
                   Application form
                 </a>
               </li>
 
-                 <li class="nav-item">
-                <a class="nav-link" href="#">
-                   <i class="fas fa-luggage-cart"></i>
+<!--                 <li class="nav-item">-->
+<!--                <a class="nav-link" href="#">-->
+<!--                   <i class="fas fa-luggage-cart"></i>-->
 
-                  Loan Application Form
-                </a>
-              </li>
+<!--                  Loan Application Form-->
+<!--                </a>-->
+<!--              </li>-->
 
             </ul>
 
@@ -95,7 +100,7 @@
             </h6>
             <ul class="nav flex-column mb-2">
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url 'staff_balances_director'%}">
                   <i class="fas fa-chart-area"></i>
                   Staff Leave Balance
                 </a>
@@ -104,7 +109,7 @@
             </ul>
             <ul class="nav flex-column mb-2">
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url 'staff_sick_leave_balances_director'%}">
                   <i class="fas fa-balance-scale"></i>
                   Sick Leave Balance
                 </a>
@@ -257,10 +262,10 @@
                                     <ul class="nav nav-pills card-header-pills">
 
                                        <li class="nav-item">
-                                          <a class="nav-link" href="#">Unit Director | <font color='red'>Annual Leave inbox({{count_manager_annual_leave}})</font></a>
+                                          <a class="nav-link" href="{% url 'filter_authorizer'%}">Unit Director | <font color='red'>Annual Leave inbox({{count_manager_annual_leave}})</font></a>
                                         </li>
                                          <li class="nav-item">
-                                        <a class="nav-link" href="#" >Approved Annual Leaves | <font color="green">inbox({{count_manager_approved_annual_leave}})</font></a>
+                                        <a class="nav-link" href="{% url 'filter_manager_approved_annual_leave'%}" >Approved Annual Leaves | <font color="green">inbox({{count_manager_approved_annual_leave}})</font></a>
                                         </li>
 
 
@@ -279,10 +284,10 @@
                                     <ul class="nav nav-pills card-header-pills">
 
                                        <li class="nav-item">
-                                          <a class="nav-link" href="#">Unit Director | <font color='red'>Sick Leave inbox({{count_manager_sick_leaves}})</font></a>
+                                          <a class="nav-link" href="{% url 'filter_sick_authorizer'%}">Unit Director | <font color='red'>Sick Leave inbox({{count_manager_sick_leaves}})</font></a>
                                         </li>
                                          <li class="nav-item">
-                                        <a class="nav-link" href="#" >Approved Sick Leaves | <font color="green">inbox({{count_manager_approved_sick_leave}})</font></a>
+                                        <a class="nav-link" href="{% url 'manager_approved_sick_leave'%}" >Approved Sick Leaves | <font color="green">inbox({{count_manager_approved_sick_leave}})</font></a>
                                         </li>
                                         </ul>
                                      </div>
@@ -326,11 +331,11 @@
                                     <ul class="nav nav-pills card-header-pills">
 
                                            <li class="nav-item">
-                                            <a class="nav-link" href="#" >Unit Director | <font color="red">Sick Leave inbox({{count_approved_sick_leave}})</font></a>
+                                            <a class="nav-link" href="{% url 'sick_to_approved_by_director'%}" >Unit Director | <font color="red">Sick Leave inbox({{count_approved_sick_leave}})</font></a>
                                             </li>
 
                                                <li class="nav-item">
-                                              <a class="nav-link" href="#" >Approved Sick Leaves | <font color="green">inbox({{count_all_approved_sick_leaves}})</font></a>
+                                              <a class="nav-link" href="{% url 'approved_sick_leaves'%}" >Approved Sick Leaves | <font color="green">inbox({{count_all_approved_sick_leaves}})</font></a>
                                           </li>
 
 
@@ -538,7 +543,7 @@
                                     <div class="card-header" >
                                     <ul class="nav nav-pills card-header-pills">
                                         <li class="nav-item">
-                                            <a class="nav-link " href="#"> Medical Scheme | <font color="red">Processed Medical details inbox({{count_processed_medical}}) </font></a></a>
+                                            <a class="nav-link " href="{%url 'processed_medical_details_profile'%}"> Medical Scheme | <font color="red">Processed Medical details inbox({{count_processed_medical}}) </font></a></a>
                                         </li>
                                     </ul>
                                      </div>

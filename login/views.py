@@ -77,10 +77,10 @@ def director_page(request):
             get_user_id = request.user.id
             pending_leave_count = NewLeave.objects.filter(department=query_set[1],
                                                           Manager_Authorization_Status="Pending").count()
-            approved_leave_count = NewLeave.objects.filter(department=query_set[2],
+            approved_leave_count = NewLeave.objects.filter(
                                                            Manager_Authorization_Status="Approved",
                                                            Director_Authorization_Status='Pending', Archived='').count()
-            allapprovedleaves = NewLeave.objects.filter(department=query_set[2],
+            allapprovedleaves = NewLeave.objects.filter(
                                                         Manager_Authorization_Status="Approved",
                                                         Director_Authorization_Status='Approved', Archived='').count()
 
@@ -88,26 +88,26 @@ def director_page(request):
             count_sick_leaves = SickLeave.objects.filter(department=query_set[1],
                                                          Manager_Authorization_Status="Pending").count()
 
-            count_approved_sick_leave = SickLeave.objects.filter(department=query_set[2],
+            count_approved_sick_leave = SickLeave.objects.filter(
                                                                  Manager_Authorization_Status="Approved",
                                                                  Director_Authorization_Status='Pending',
                                                                  Archived='').count()
 
-            count_all_approved_sick_leaves = SickLeave.objects.filter(department=query_set[2],
+            count_all_approved_sick_leaves = SickLeave.objects.filter(
                                                                       Manager_Authorization_Status="Approved",
                                                                       Director_Authorization_Status='Approved',
                                                                       Archived='').count()
 
-            count_manager_annual_leave = NewLeave.objects.filter(department=query_set[2],
+            count_manager_annual_leave = NewLeave.objects.filter(
                                                                  user__groups__name='authorizer').filter(
                 Director_Authorization_Status='Pending').count()
-            count_manager_approved_annual_leave = NewLeave.objects.filter(department=query_set[2],
+            count_manager_approved_annual_leave = NewLeave.objects.filter(
                                                                           user__groups__name='authorizer'). \
                 filter(Director_Authorization_Status='Approved').count()
-            count_manager_sick_leaves = SickLeave.objects.filter(department=query_set[2],
+            count_manager_sick_leaves = SickLeave.objects.filter(
                                                                  user__groups__name='authorizer'). \
                 filter(Director_Authorization_Status='Pending').count()
-            count_manager_approved_sick_leave = SickLeave.objects.filter(department=query_set[2],
+            count_manager_approved_sick_leave = SickLeave.objects.filter(
                                                                          user__groups__name='authorizer'). \
                 filter(Director_Authorization_Status='Approved').count()
 

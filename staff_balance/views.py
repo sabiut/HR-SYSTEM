@@ -46,6 +46,12 @@ def staff_sick_leave_balances(request):
     return render(request, 'display_sick_leave_balance.html', {'staff_sick_balance': staff_sick_balance})
 
 
+@login_required(login_url='home')
+def staff_sick_leave_balances_director(request):
+    staff_sick_balance = Sick_leave_balance.objects.all()
+    return render(request, 'display_sick_leave_balance_director.html', {'staff_sick_balance': staff_sick_balance})
+
+
 # get staff annual balance by department name
 @login_required(login_url='home')
 def staff_balances_authorizer(request):

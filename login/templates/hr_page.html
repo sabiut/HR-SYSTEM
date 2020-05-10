@@ -42,7 +42,7 @@
 {% load humanize %}
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">DQ Software Consultant</a>
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">COMPX576-20A Project</a>
       <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
@@ -58,6 +58,10 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
+                   <a class="nav-link" href="http://127.0.0.1:8000/hr/">
+                  <i class="fas fa-home"></i>
+                  Home
+                </a>
                 <a class="nav-link active" href="http://127.0.0.1:8000/admin/">
 
                    <i class="fas fa-user-cog"></i>
@@ -72,15 +76,15 @@
                 </a>
               </li>
 
-                <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <i class="fas fa-comment-dollar"></i>
-                  Payroll
-                </a>
-              </li>
+<!--                <li class="nav-item">-->
+<!--                <a class="nav-link" href="#">-->
+<!--                  <i class="fas fa-comment-dollar"></i>-->
+<!--                  Payroll-->
+<!--                </a>-->
+<!--              </li>-->
 
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{%url 'leave_options'%}">
                   <i class="fab fa-wpforms"></i>
                   Application form
                 </a>
@@ -183,21 +187,21 @@
 
 
             <hr>
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>My Payslip Reports</span>
-              <a class="d-flex align-items-center text-muted" href="#">
-                <i class="fas fa-file-invoice-dollar"></i>
-              </a>
-            </h6>
-            <ul class="nav flex-column mb-2">
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <i class="fas fa-receipt"></i>
-                  My Payslip Report
-                </a>
-              </li>
+<!--            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">-->
+<!--              <span>My Payslip Reports</span>-->
+<!--              <a class="d-flex align-items-center text-muted" href="#">-->
+<!--                <i class="fas fa-file-invoice-dollar"></i>-->
+<!--              </a>-->
+<!--            </h6>-->
+<!--            <ul class="nav flex-column mb-2">-->
+<!--              <li class="nav-item">-->
+<!--                <a class="nav-link" href="#">-->
+<!--                  <i class="fas fa-receipt"></i>-->
+<!--                  My Payslip Report-->
+<!--                </a>-->
+<!--              </li>-->
 
-            </ul>
+<!--            </ul>-->
 
           </div>
         </nav>

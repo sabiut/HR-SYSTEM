@@ -1,11 +1,8 @@
 <head>
-    <title> Staff Leave Balance</title>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 
-
-    <!-- jquery printer setup -->
-
+  <!-- jquery printer setup -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- test setup printer-->
 
@@ -13,12 +10,12 @@
     <script>
 $(function () {
     $('button[type="submit"]').click(function () {
-        var pageTitle = 'Staff Annual Leave Balance',
+        var pageTitle = 'Staff Sick Leave Balance',
             stylesheet = '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css',
             win = window.open('', 'Print', 'width=500,height=300');
         win.document.write('<html><head><title>' + pageTitle + '</title>' +
             '<link rel="stylesheet" href="' + stylesheet + '">' +
-            '</head><body>' + $('#tblCustomers')[0].outerHTML + '</body></html>');
+            '</head><body>' + $('#sick_leave')[0].outerHTML + '</body></html>');
 
         win.document.close();
         win.print();
@@ -32,50 +29,46 @@ $(function () {
     <!-- end test setup printer-->
 
 
-
-
 </head>
 {% extends "director_page.html"%}
 
 {%block content%}
 
 <div class="container">
-    <div class="container">
+  <div class="container">
     <div class="row">
 
         <div class="col-md-6"></div>
 
         <div class="col-md-5">
+            <span class="pull-right"> <a href="{%url 'download_staff_sick_balance'%}"  onclick="exportTableToExcel('tblCustomers')">  | <i style="font-size:20px" class="fa">&#xf1c3; </i>  CSV File </a> </span>
+            <span class="pull-right"><button class="btn btn-sm pull-right btn-default" type="submit"><i class="fas fa-print"> Print</i> </button></span>
 
-             <span class="pull-right"> <a href="{%url 'download_staff_balance'%}"  onclick="exportTableToExcel('tblCustomers')">  | <i style="font-size:20px" class="fa">&#xf1c3; </i>  CSV File </a> </span>
-                <span class="pull-right"><button class="btn btn-sm pull-right btn-default" type="submit"><i class="fas fa-print"> Print </i> </button>  </span>
         </div>
     </div>
-
-</div>
-  <h2>Staff Leave Balance</h2>
-  <p>List of all staff current balance.</p>
-  <table class="table" id="tblCustomers">
+  <h2>Sick Leave Balance</h2>
+  <p>List of all staff current sick leave balance.</p>
+  <table class="table" id="sick_leave">
     <thead>
       <tr class="info">
 <!--        <th>Action</th>-->
         <th>First Name</th>
         <th>Last Name</th>
           <th>Department</th>
-        <th>Entitlement</th>
-        <th>Current Balance</th>
+        <th>Sick Leave Balance</th>
+
       </tr>
     </thead>
-    {%for leave in balance%}
+    {%for leave in staff_sick_balance%}
 
     <tbody>
       <tr class="success">
-<!--        <td><a href="{% url 'update_balance' leave.user_id %}"> <i class="fas fa-user-edit"></i></a></td>-->
+<!--       <td><a href="#"><i class="fas fa-file-archive"></i></a></td>-->
         <td>{{leave.user.first_name}}</td>
         <td>{{leave.user.last_name}}</td>
           <td>{{leave.user.profile.department}}</td>
-        <td>{{leave.user.monthly_entitlement.entitlement}}</td>
-        <td>{{leave.Leave_current_balance|floatformat:2}}</td>
+        <td>{{leave.sick_leave_balance|floatformat:2}}</td>
+
     </tbody>
     {%endfor%}
 
