@@ -21,4 +21,5 @@ urlpatterns = [
     path(r'display_manager_approved_sick_leave/', views.display_manager_approved_sick_leave,
          name='display_manager_approved_sick_leave'),
 
+
 ]

@@ -174,7 +174,7 @@ def filter_pending_authorizer_sick_leave(request):
     get_user_id = request.user.id
     in_group = SickLeave.objects.filter(user_id=get_user_id, user__groups__name='authorizer').filter(
         Director_Authorization_Status='Pending')
-    return render(request, 'manager_sick_leave.html', {'in_group': in_group})
+    return render(request, 'manager_pending_sick_leave.html', {'in_group': in_group})
 
 
 @login_required(login_url='home')
@@ -182,4 +182,4 @@ def manager_approved_sick_leave_authorizer_page(request):
     get_user_id = request.user.id
     in_group = SickLeave.objects.filter(user_id=get_user_id, user__groups__name='authorizer').filter(
         Director_Authorization_Status='Approved')
-    return render(request, 'manager_approved_sick_leave_director.html', {'in_group': in_group})
+    return render(request, 'manager_pending_sick_leave.html', {'in_group': in_group})

@@ -103,7 +103,7 @@ def display_approved_sick_leaves(request):
     query_set = Group.objects.filter(user=request.user)
     all_approved_sick_leaves = SickLeave.objects.filter(
                                                         Manager_Authorization_Status="Approved",
-                                                        Director_Authorization_Status="Approved")
+                                                        Director_Authorization_Status="Pending")
     return render(request, 'all_approved_sick_leaves.html', {'all_approved_sick_leaves': all_approved_sick_leaves})
 
 

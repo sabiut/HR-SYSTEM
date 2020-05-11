@@ -2,7 +2,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 </head>
-{% extends "director_page.html"%}
+{% extends "authorizer_page.html"%}
 
 {%block content%}
 
@@ -13,7 +13,6 @@
   <table class="table" id="tblCustomers">
     <thead>
       <tr>
-        <th>Action</th>
         <th>First Name</th>
         <th>Last Name</th>
           <th>Launch Date</th>
@@ -26,6 +25,7 @@
           <th>Medical certification</th>
           <th>Authorization Status</th>
           <th>Authorize By</th>
+          <th>Authorize Date</th>
 
       </tr>
     </thead>
@@ -33,7 +33,6 @@
 
     <tbody>
       <tr class="success">
-       <td><a href="{% url 'director_approve_sick_leave' leave.id %}"><i class="fas fa-tools"></i></a></td>
         <td>{{leave.user.first_name}}</td>
         <td>{{leave.user.last_name}}</td>
           <td>{{leave.Todays_Date}}</td>
@@ -44,8 +43,9 @@
         <td>{{leave.Total_working_days}}</td>
         <td>{{leave.Brief_explanation_of_illness}}</td>
           <td><a href=" {{ leave.medical_certification.url }}" class="btn btn-primary btn-sm" target="_blank"><i class="fas fa-cloud-download-alt"></i> Download PDF</a> </td>
-          <td>{{leave.Manager_Authorization_Status}}</td>
-          <td>{{leave.Authorized_by_Manager}}</td>
+          <td>{{leave.Director_Authorization_Status}}</td>
+          <td>{{leave.Authorized_by_Director}}</td>
+          <td>{{leave.Date_Authorized}}</td>
 
 
 

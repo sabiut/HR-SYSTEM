@@ -330,12 +330,12 @@
                                     <div class="card-header" >
                                     <ul class="nav nav-pills card-header-pills">
 
-                                           <li class="nav-item">
-                                            <a class="nav-link" href="{% url 'sick_to_approved_by_director'%}" >Unit Director | <font color="red">Sick Leave inbox({{count_approved_sick_leave}})</font></a>
-                                            </li>
+<!--                                           <li class="nav-item">-->
+<!--                                            <a class="nav-link" href="{% url 'sick_to_approved_by_director'%}" >Unit Director | <font color="red">Sick Leave inbox({{count_approved_sick_leave}})</font></a>-->
+<!--                                            </li>-->
 
                                                <li class="nav-item">
-                                              <a class="nav-link" href="{% url 'approved_sick_leaves'%}" >Approved Sick Leaves | <font color="green">inbox({{count_all_approved_sick_leaves}})</font></a>
+                                              <a class="nav-link" href="{% url 'approved_sick_leaves'%}" >Approved Sick Leaves | <font color="green">inbox({{count_approved_sick_leave}})</font></a>
                                           </li>
 
 
@@ -382,7 +382,7 @@
                                             <a class="nav-link " href="{%url 'pending_encashments_director'%}"> Leave encashments | <font color="red">Pending Approval inbox({{count_pending_encashment}}) </font></a></a>
                                         </li>
                                          <li class="nav-item">
-                                            <a class="nav-link" href="{%url 'approved_encashments_authorizer'%}" >Approved by Director | <font color="green">Encashments inbox({{count_approved_encashments}})</font></a>
+                                            <a class="nav-link" href="{%url 'approved_encashments_director'%}" >Approved by Director | <font color="green">Encashments inbox({{count_approved_encashments}})</font></a>
                                          </li>
                                         </ul>
                                      </div>

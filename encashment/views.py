@@ -11,7 +11,6 @@ from encashment.forms import User_form, leave_encashment_form, director_authoriz
     processing_encashment_form
 from login.models import encashment, Leave_Balance
 
-
 # from medical_scheme.models import medical_details
 from medical_scheme.models import medical_details
 
@@ -26,8 +25,9 @@ def encashment_application(request):
             user = user_form.save()
             new_leave = encashment_form.save(commit=False)
             new_leave.user = user
-            new_leave.save()
             send_encashment_email_to_Director(request)  # call the email method to send email to authorizer
+            new_leave.save()
+
             return render(request, "encashment_application_thanks.html")
     else:
         user_form = User_form(instance=request.user)
@@ -43,8 +43,8 @@ def encashment_application(request):
 def send_encashment_email_to_Director(request):
     email_obj = encashment.objects.order_by('-pk')[0]
     if request.user.is_authenticated:
-        query_set = Group.objects.filter(user=request.user)
-        in_group = User.objects.filter(groups__name=query_set[0]).filter(groups__name="Director")
+        # query_set = Group.objects.filter(user=request.user)
+        in_group = User.objects.filter(groups__name="Director")
         for a in in_group:
             to_emails = a.email
             send_mail("Leave Encashment Application Form",
@@ -62,7 +62,8 @@ def send_encashment_email_to_Director(request):
 
 @login_required(login_url='home')
 def pending_encashments_athorizer(request):
-    pending_encashments = encashment.objects.filter(approval_status='Pending')
+    get_user_id = request.user.id
+    pending_encashments = encashment.objects.filter(user_id=get_user_id, approval_status='Pending')
     return render(request, 'my_pending_encashments_auth.html', {'pending_encashments': pending_encashments})
 
 
@@ -74,6 +75,13 @@ def pending_encashments_director(request):
 
 @login_required(login_url='home')
 def approved_encashments_authorizer(request):
+    get_user_id = request.user.id
+    pending_encashments = encashment.objects.filter(user_id=get_user_id, approval_status='Approved')
+    return render(request, 'approved_encashments.html', {'pending_encashments': pending_encashments})
+
+
+@login_required(login_url='home')
+def approved_encashments_director(request):
     pending_encashments = encashment.objects.filter(approval_status='Approved')
     return render(request, 'approved_encashments.html', {'pending_encashments': pending_encashments})
 

@@ -7,7 +7,7 @@ urlpatterns = [
     path(r'<int:staff_id>/authorize_encashment/', views.director_authorize_encashment, name='authorize_encashment'),
     path(r'pending_encashments_profile/', views.pending_encashments_profile, name='pending_encashment'),
     path(r'approved_encashments_authorizer/', views.approved_encashments_authorizer,
-          name='approved_encashments_authorizer'),
+         name='approved_encashments_authorizer'),
     path(r'approved_encashments_profile/', views.approved_encashments_profile, name='approved_encashments_profile'),
     # path(r'director_send_encashment_email_to_staff/', views.director_send_encashment_email_to_staff,
     #      name='director_send_encashment_email_to_staff'),
@@ -16,7 +16,7 @@ urlpatterns = [
     path(r'<int:staff_id>/processing_encashment/', views.financial_controller_processed_pay, name='process_encashment'),
     path(r'all_processed_encashments/', views.all_processed_encashments, name='all_processed_encashments'),
     path(r'<int:staff_id>/encashment_report', views.encashment_report, name='encashment_report'),
-    path(r'pending_encashments_director/', views.pending_encashments_director, name ='pending_encashments_director')
+    path(r'pending_encashments_director/', views.pending_encashments_director, name='pending_encashments_director'),
+    path(r'approved_encashments_director/', views.approved_encashments_director, name='approved_encashments_director')
 
 ]
-
